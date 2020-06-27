@@ -5,8 +5,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Library book system</title>
-    <!-- JQuery-->
+    <title>The Librarian</title>
+    <!--CSS-->
+    <link href="styles.css" rel="stylesheet" />
+    <!--Jquery-->
     <script
       src="https://code.jquery.com/jquery-2.2.4.min.js"
       integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
@@ -28,35 +30,12 @@
       href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
       rel="stylesheet"
     />
-    <!-- Minified Cirrus CSS <link rel="stylesheet" href="../css/cirrus.min.css" />-->
-    <style>
-      .img {
-        background-image: url('library.jpg');
-        background-size: cover;
-        background-attachment: fixed;
-      }
-      td {
-        max-width: 0rem;
-        width: 30%;
-      }
-      th {
-        width: 30%;
-      }
-      .td-icons {
-        text-align: right;
-        width: 10%;
-        padding: 0;
-      }
-    </style>
   </head>
-  <body class="img">
-    <div
-      class="content *-tablet w-100 u-this-overlay"
-      style="padding-top: 2rem;"
-    >
+  <body>
+    <div class="content *-tablet w-90">
       <div class="row">
         <div class="col-12">
-          <div class="card" style="padding: 1rem;">
+          <div class="card">
             <div class="tab-container tabs-classic tabs-center tabs-fill">
               <ul>
                 <li><a>Bookings</a></li>
@@ -64,140 +43,101 @@
                 <li><a>Members</a></li>
               </ul>
             </div>
-            <!--BOOK SECTION-->
-            <div class="section input-control" id="book-container">
-              <h5 class="u-text-center">Add a book</h5>
-              <!--FORM -->
-              <form
-                class="form"
-                autocomplete="off"
-                id="book-form"
-                style="padding: 0rem; font-size: 0.9rem;"
-              >
+            <!--END TABS CONTAINER  -  -  -  -  -  -  -  -  -  -  -  -  -  - -->
+            <div id="book-container">
+              <!--FORM -------------------------------------------------------->
+              <form autocomplete="off" id="book-form">
+                <h3 class="u-text-center font-thin title">Add a book</h3>
+                <!--title-->
                 <div class="form-section">
                   <label class="font-normal"
-                    >Book title:<span class="required">*</span></label
-                  >
+                    >Book title:<span class="required">*</span>
+                  </label>
                   <input class="input-small" type="text" id="book-title" />
                 </div>
+                <!--author-->
                 <div class="form-section">
                   <label class="font-normal">Book Author:</label>
                   <input class="input-small" type="name" id="book-author" />
                 </div>
+                <!--ISBM-->
                 <div class="form-section">
                   <label class="font-normal"
-                    >Book ISBM:<span class="required">*</span></label
-                  >
+                    >Book ISBM:<span class="required">*</span>
+                  </label>
                   <input class="input-small" type="number" id="book-isbm" />
                 </div>
+                <!--add book-->
                 <input
                   type="submit"
-                  class="btn-animated btn-small btn-primary u-fill-width"
                   value="Add Book"
+                  class="btn-animated btn-small btn-primary u-fill-width"
                 />
               </form>
-              <div class="divider"></div>
-              <!--Table Book-->
-              <table
-                class="table borderless u-text-left fixed-head"
-                id="book-table"
-              >
-                <h5 class="u-text-center">Books</h5>
+              <!--Table Book -------------------------------------------------->
+              <table class="table borderless u-text-left fixed-head">
+                <div class="divider"></div>
+                <h2 class="u-text-center font-normal">Books</h2>
+                <!--search bar-->
                 <input
                   class="input-small"
                   type="search"
-                  placeholder="search for a book"
-                  id="search-book"
+                  placeholder="search"
+                  id="search"
                   autocomplete="off"
                 />
+                <!--table head-->
                 <thead>
                   <tr>
                     <th>ISBM#</th>
                     <th>Title</th>
                     <th>Author</th>
-                    <th class="td-icons"></th>
+                    <th class="td-small"></th>
                   </tr>
                 </thead>
-                <tbody id="table-body" style="height: 30rem;">
+                <!--table body-->
+                <tbody id="book-tbody">
                   <tr id="body-tr">
-                    <td class="td-book-info">1234567890123</td>
-                    <td class="td-book-info">
-                      Romeo and Juliet and los 7 enanos
-                    </td>
-                    <td class="td-book-info">Shakespeare el meor meor</td>
+                    <td>1234567890123</td>
+                    <td>Romeo and Juliet</td>
+                    <td>Shakespeare</td>
                     <td class="td-icons">
                       <a
                         href="#modal-id"
                         class="fas fa-edit fa-lg hover-grow"
-                        style="cursor: pointer;"
                       ></a>
-                      <i
-                        class="fas fa-trash fa-lg hover-grow"
-                        style="color: red; cursor: pointer;"
-                      ></i>
+                      <span class="fas fa-trash fa-lg hover-grow"></span>
                     </td>
                   </tr>
                   <tr id="body-tr">
-                    <td class="td-book-info">32</td>
-                    <td class="td-book-info">
-                      Romulo and Juliet and los 7 enanos
-                    </td>
-                    <td class="td-book-info">Shakespeare el meor meor</td>
+                    <td>569873216852</td>
+                    <td>El Gato con Botas</td>
+                    <td>Rafael Castillo</td>
                     <td class="td-icons">
                       <a
                         href="#modal-id"
                         class="fas fa-edit fa-lg hover-grow"
-                        style="cursor: pointer;"
                       ></a>
-                      <i
-                        class="fas fa-trash fa-lg hover-grow"
-                        style="color: red; cursor: pointer;"
-                      ></i>
-                    </td>
-                  </tr>
-                  <tr id="body-tr">
-                    <td class="td-book-info">256468435465</td>
-                    <td class="td-book-info">
-                      gemeo and Juliet and los 7 enanos
-                    </td>
-                    <td class="td-book-info">Shakespeare el meor meor</td>
-                    <td class="td-icons">
-                      <a
-                        href="#modal-id"
-                        class="fas fa-edit fa-lg hover-grow"
-                        style="cursor: pointer;"
-                      ></a>
-                      <i
-                        class="fas fa-trash fa-lg hover-grow"
-                        style="color: red; cursor: pointer;"
-                      ></i>
+                      <span class="fas fa-trash fa-lg hover-grow"></span>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <!--END BOOK SECTION-->
+            <!--END BOOK SECTION  -  -  -  -  -  -  -  -  -  -  -  -  -  -  --->
           </div>
-          <!--End of card-->
+          <!--End of CARD  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - -->
         </div>
-        <!--End of column-->
       </div>
-      <!--End of row-->
     </div>
-    <!--End of main container-->
     <!--MODAL-->
     <div class="modal" id="modal-id">
       <div class="modal-content" role="document">
         <div class="modal-header">
-          <div class="modal-title">Edit book</div>
+          <h4 class="font-normal u-center title">Edit book</h4>
         </div>
         <div class="modal-body">
-          <form
-            class="form"
-            autocomplete="off"
-            id="book-edit-form"
-            style="padding: 0rem; font-size: 0.9rem;"
-          >
+          <form class="form" autocomplete="off" id="book-edit-form">
             <div class="form-section">
               <label class="font-normal"
                 >Book tittle:<span class="required">*</span></label
@@ -210,22 +150,31 @@
             </div>
             <div class="form-section">
               <label class="font-normal"
-                >Book ISBM:<span class="required">*</span></label
-              >
-              <input class="input-small" type="number" id="book-edit-isbm" />
+                >Book ISBM:<span
+                  class="required fas fa-info-circle hover-grow tooltip tooltip--right"
+                  data-tooltip="ISBM can't be changed, if needed add a new book"
+                ></span
+              ></label>
+              <input
+                disabled
+                class="input-small"
+                type="number"
+                id="book-edit-isbm"
+              />
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <a href="#book-container" style="display: inline-block;">
+          <a class="modal-footer-btn" href="#book-container">
             <button class="btn-primary save">Save</button>
           </a>
-          <a href="#book-container" style="display: inline-block;">
+          <a class="modal-footer-btn" href="#book-container">
             <button class="btn-secondary cancel">Cancel</button>
           </a>
         </div>
       </div>
     </div>
+    <!--JavaScript-->
     <script src="app.js"></script>
   </body>
 </html>

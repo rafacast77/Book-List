@@ -1,22 +1,22 @@
 /** @format */
 ////////////////////////////////////////////////////////////////////////////////
-//  UI element variable declaration, identification, initialization
+// BOOKS TAB UI element variable declaration, identification, initialization
 ////////////////////////////////////////////////////////////////////////////////
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 const tab_EL = document.querySelector('.tab-container'),
   tab_li_ELS = document.querySelector('.tab-container').firstElementChild
     .children,
-  form_EL = document.querySelector('.form'),
-  bookTableBody_EL = document.querySelector('#table-body'),
+  form_EL = document.querySelector('#book-form'),
+  bookTableBody_EL = document.querySelector('#book-tbody'),
   edit_body = document.querySelector('#edit-body'),
   bookEditTitle_EL = document.querySelector('#book-edit-title'),
   bookEditAuthor_EL = document.querySelector('#book-edit-author'),
   bookEditIsbm_EL = document.querySelector('#book-edit-isbm'),
   bookEditFormEL = document.querySelector('.modal-footer'),
   search_EL = document.querySelector('#search-book');
-
-////////////////////////////////////////////////////////////////////////////////
-// Objects and Functions of Books tab
-////////////////////////////////////////////////////////////////////////////////
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Book-Tab Objects and Functions
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 class Book {
   constructor(title, author, isbm) {
     this.title = title;
@@ -29,9 +29,9 @@ class UIBooks {
     const newBook_EL = document.createElement('tr');
     newBook_EL.id = 'body-tr';
     newBook_EL.innerHTML = `
-    <td class="td-book-info">${book.isbm}</td>
-    <td class="td-book-info">${book.title}</td>
-    <td class="td-book-info">${book.author}</td>
+    <td>${book.isbm}</td>
+    <td>${book.title}</td>
+    <td>${book.author}</td>
     <td class="td-icons"><a  
           href="#modal-id"
           class="fas fa-edit fa-lg hover-grow"
@@ -71,13 +71,13 @@ class UIBooks {
       let tdList = tr.children;
       // Iterates through each td element in the tr element and test for match
       for (let td of tdList) {
-        tdText = td.textContent;
+        let tdText = td.textContent;
         if (tdText.toLowerCase().indexOf(searchText) != -1) {
           tr.style.visibility = 'visible';
           tr.lastElementChild.style.visibility = 'visible';
           break;
         } else {
-          /* TODO find why there is a delay on disappearing the icons when collapsing the entire row, it has been temporary fixed by collapsing the element individually/first.*/
+          /* TODO find why there is a delay on disappearing the icons cell when collapsing the entire row, it has been temporary fixed by collapsing the element individually/first.*/
           tr.lastElementChild.style.visibility = 'collapse';
           tr.style.visibility = 'collapse';
         }
@@ -85,10 +85,9 @@ class UIBooks {
     });
   }
 }
-
-////////////////////////////////////////////////////////////////////////////////
-// Event Listener
-////////////////////////////////////////////////////////////////////////////////
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Book-Tab Event Listeners
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 tab_EL.addEventListener('click', function (e) {
   for (var x of tab_li_ELS) {
     x.className = '';
@@ -145,5 +144,31 @@ bookTableBody_EL.addEventListener('click', function (e) {
 search_EL.addEventListener('keyup', UIBooks.searchBook);
 
 ////////////////////////////////////////////////////////////////////////////////
-//
+// MEMBERS TAB
 ////////////////////////////////////////////////////////////////////////////////
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Books-Tab UI element variable declaration, identification, initialization
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Book-Tab Objects and Functions
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Book-Tab Event Listeners
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+////////////////////////////////////////////////////////////////////////////////
+// BOOKINGS TAB
+////////////////////////////////////////////////////////////////////////////////
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Books-Tab UI element variable declaration, identification, initialization
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Book-Tab Objects and Functions
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Book-Tab Event Listeners
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
