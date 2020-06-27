@@ -25,7 +25,7 @@ class Book {
   }
 }
 class UIBooks {
-  addBookToList(book) {
+  static addBookToList(book) {
     const newBook_EL = document.createElement('tr');
     newBook_EL.id = 'body-tr';
     newBook_EL.innerHTML = `
@@ -45,48 +45,39 @@ class UIBooks {
     `;
     bookTableBody_EL.appendChild(newBook_EL);
   }
-  static removeBook(e) {
-    if (e.target.classList.contains('fa-trash')) {
-      e.target.parentElement.parentElement.remove();
-    }
+  static removeBook(book) {
+    // Iterates through all rows if ISBM match it edits that row
+    document.querySelectorAll('#body-tr').forEach(function (tr) {
+      let targetISBM = tr.children[0].innerText;
+      if (book.isbm === targetISBM) {
+        tr.remove();
+      }
+    });
   }
-  static editBook(e) {
-    // loads the edit form with current values
-    if (e.target.classList.contains('fa-edit')) {
-      bookEditAuthor_EL.value =
-        e.target.parentElement.parentElement.children[2].innerText;
-      bookEditIsbm_EL.value =
-        e.target.parentElement.parentElement.children[0].innerText;
-      bookEditTitle_EL.value =
-        e.target.parentElement.parentElement.children[1].innerText;
-      // If save, it replaces old values for the new
-      bookEditFormEL.addEventListener('click', function saveEdit(e2) {
-        if (e2.target.classList.contains('save')) {
-          e.target.parentElement.parentElement.children[0].innerText =
-            bookEditIsbm_EL.value;
-          e.target.parentElement.parentElement.children[1].innerText =
-            bookEditTitle_EL.value;
-          e.target.parentElement.parentElement.children[2].innerText =
-            bookEditAuthor_EL.value;
-          bookEditFormEL.removeEventListener('click', saveEdit);
-        }
-      });
-    }
+  static editBook(book) {
+    // Iterates through all rows if ISBM match it edits that row
+    document.querySelectorAll('#body-tr').forEach(function (tr) {
+      let targetISBM = tr.children[0].innerText;
+      if (book.isbm === targetISBM) {
+        tr.children[1].textContent = book.title;
+        tr.children[2].textContent = book.author;
+      }
+    });
   }
   static searchBook(e) {
-    const text = e.target.value.toLowerCase();
+    const searchText = e.target.value.toLowerCase();
     // Iterates through each tr element in the table body
     document.querySelectorAll('#body-tr').forEach(function (tr) {
       let tdList = tr.children;
-      // Iterates through each td from the tr element and test for string match
+      // Iterates through each td element in the tr element and test for match
       for (let td of tdList) {
-        item = td.textContent;
-        if (item.toLowerCase().indexOf(text) != -1) {
+        tdText = td.textContent;
+        if (tdText.toLowerCase().indexOf(searchText) != -1) {
           tr.style.visibility = 'visible';
           tr.lastElementChild.style.visibility = 'visible';
           break;
         } else {
-          /* TODO The icon element has a delay when collapsing the row, it has been temporary fixed by collapsing it individually/first.*/
+          /* TODO find why there is a delay on disappearing the icons when collapsing the entire row, it has been temporary fixed by collapsing the element individually/first.*/
           tr.lastElementChild.style.visibility = 'collapse';
           tr.style.visibility = 'collapse';
         }
@@ -94,6 +85,7 @@ class UIBooks {
     });
   }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 // Event Listener
 ////////////////////////////////////////////////////////////////////////////////
@@ -103,15 +95,14 @@ tab_EL.addEventListener('click', function (e) {
   }
   e.target.parentElement.className = 'selected';
 });
-
+// Add Book
 form_EL.addEventListener('submit', function (e) {
   const title = document.querySelector('#book-title').value,
     author = document.querySelector('#book-author').value,
     isbm = document.querySelector('#book-isbm').value,
-    book = new Book(title, author, isbm),
-    uiBooks = new UIBooks();
+    book = new Book(title, author, isbm);
 
-  uiBooks.addBookToList(book);
+  UIBooks.addBookToList(book);
 
   document.querySelector('#book-title').value = '';
   document.querySelector('#book-author').value = '';
@@ -119,10 +110,40 @@ form_EL.addEventListener('submit', function (e) {
 
   e.preventDefault();
 });
+// Open Edit-Form
+bookTableBody_EL.addEventListener('click', function (e) {
+  // loads the edit-form with current values
+  if (e.target.classList.contains('fa-edit')) {
+    bookEditIsbm_EL.value =
+      e.target.parentElement.parentElement.children[0].innerText;
+    bookEditTitle_EL.value =
+      e.target.parentElement.parentElement.children[1].innerText;
+    bookEditAuthor_EL.value =
+      e.target.parentElement.parentElement.children[2].innerText;
+  }
+});
+// Edit Book
+bookEditFormEL.addEventListener('click', function (e) {
+  if (e.target.classList.contains('save')) {
+    const title = document.querySelector('#book-edit-title').value,
+      author = document.querySelector('#book-edit-author').value,
+      isbm = document.querySelector('#book-edit-isbm').value,
+      book = new Book(title, author, isbm);
 
-bookTableBody_EL.addEventListener('click', UIBooks.removeBook);
-bookTableBody_EL.addEventListener('click', UIBooks.editBook);
-search_EL.addEventListener('keyup', search);
+    UIBooks.editBook(book);
+  }
+});
+// Delete Book
+bookTableBody_EL.addEventListener('click', function (e) {
+  if (e.target.classList.contains('fa-trash')) {
+    let isbm = e.target.parentElement.parentElement.children[0].innerText;
+    // We only want isbm # to find the row to be eliminated
+    book = new Book(null, null, isbm);
+    UIBooks.removeBook(book);
+  }
+});
+search_EL.addEventListener('keyup', UIBooks.searchBook);
+
 ////////////////////////////////////////////////////////////////////////////////
-// Functions
+//
 ////////////////////////////////////////////////////////////////////////////////
