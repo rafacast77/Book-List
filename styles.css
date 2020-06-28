@@ -14,7 +14,7 @@
   padding-top: 1.5rem;
 }
 body {
-  background-image: url('/img/library.jpg');
+  background-image: url('library.jpg');
   background-size: cover;
   background-attachment: fixed;
 }
