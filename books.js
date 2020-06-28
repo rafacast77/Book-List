@@ -3,17 +3,18 @@
 // BOOKS TAB UI element variable declaration, identification, initialization
 ////////////////////////////////////////////////////////////////////////////////
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-const tab_EL = document.querySelector('.tab-container'),
-  tab_li_ELS = document.querySelector('.tab-container').firstElementChild
-    .children,
+const bookContainer_EL = document.querySelector('#book-container'),
   form_EL = document.querySelector('#book-form'),
   bookTableBody_EL = document.querySelector('#book-tbody'),
   edit_body = document.querySelector('#edit-body'),
   bookEditTitle_EL = document.querySelector('#book-edit-title'),
   bookEditAuthor_EL = document.querySelector('#book-edit-author'),
   bookEditIsbm_EL = document.querySelector('#book-edit-isbm'),
-  bookEditFormEL = document.querySelector('.modal-footer'),
-  search_EL = document.querySelector('#search-book');
+  bookEditFormEL = document.querySelector('#modal-edit'),
+  deleteWarning_EL = document.querySelector('#modal-warning'),
+  delItemName_EL = document.querySelector('#delete-message'),
+  search_EL = document.querySelector('#search');
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Book-Tab Objects and Functions
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -32,18 +33,29 @@ class UIBooks {
     <td>${book.isbm}</td>
     <td>${book.title}</td>
     <td>${book.author}</td>
-    <td class="td-icons"><a  
-          href="#modal-id"
-          class="fas fa-edit fa-lg hover-grow"
-          style="cursor: pointer;"
-          ></a>
-        <i 
-          class="fas fa-trash fa-lg hover-grow"
-          style="color: red; cursor: pointer;"
-        ></i>
+    <td class="td-icons">
+      <a
+      href="#modal-edit"
+      class="fas fa-edit fa-lg hover-grow"
+      ></a>
+      <a
+      href="#modal-warning"
+      class="fas fa-trash fa-lg hover-grow"
+      ></a>
     </td>
     `;
     bookTableBody_EL.appendChild(newBook_EL);
+    toastAlert('A new Book has been added', 'success');
+  }
+  static requiredMissing(book) {
+    if (book.title === '' || book.isbm === '') {
+      return true;
+    }
+  }
+  static invalidISBM(book) {
+    if (book.isbm.length < 10 || book.isbm.length > 13) {
+      return true;
+    }
   }
   static removeBook(book) {
     // Iterates through all rows if ISBM match it edits that row
@@ -51,6 +63,7 @@ class UIBooks {
       let targetISBM = tr.children[0].innerText;
       if (book.isbm === targetISBM) {
         tr.remove();
+        toastAlert('Book has been removed', 'success');
       }
     });
   }
@@ -61,6 +74,7 @@ class UIBooks {
       if (book.isbm === targetISBM) {
         tr.children[1].textContent = book.title;
         tr.children[2].textContent = book.author;
+        toastAlert('Book has been successfully edited', 'success');
       }
     });
   }
@@ -88,26 +102,24 @@ class UIBooks {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Book-Tab Event Listeners
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-tab_EL.addEventListener('click', function (e) {
-  for (var x of tab_li_ELS) {
-    x.className = '';
-  }
-  e.target.parentElement.className = 'selected';
-});
+
 // Add Book
 form_EL.addEventListener('submit', function (e) {
   const title = document.querySelector('#book-title').value,
     author = document.querySelector('#book-author').value,
     isbm = document.querySelector('#book-isbm').value,
     book = new Book(title, author, isbm);
+  if (UIBooks.requiredMissing(book)) {
+    toastAlert('Missing title information or ISBM', 'error');
+  } else if (UIBooks.invalidISBM(book)) {
+    toastAlert('ISBM must be between 10 to 13 characters', 'error');
+  } else {
+    UIBooks.addBookToList(book);
 
-  UIBooks.addBookToList(book);
-
-  document.querySelector('#book-title').value = '';
-  document.querySelector('#book-author').value = '';
-  document.querySelector('#book-isbm').value = '';
-
-  e.preventDefault();
+    document.querySelector('#book-title').value = '';
+    document.querySelector('#book-author').value = '';
+    document.querySelector('#book-isbm').value = '';
+  }
 });
 // Open Edit-Form
 bookTableBody_EL.addEventListener('click', function (e) {
@@ -134,11 +146,18 @@ bookEditFormEL.addEventListener('click', function (e) {
 });
 // Delete Book
 bookTableBody_EL.addEventListener('click', function (e) {
+  let bookTitle = e.target.parentElement.parentElement.children[1].textContent;
   if (e.target.classList.contains('fa-trash')) {
-    let isbm = e.target.parentElement.parentElement.children[0].innerText;
-    // We only want isbm # to find the row to be eliminated
-    book = new Book(null, null, isbm);
-    UIBooks.removeBook(book);
+    delItemName_EL.textContent = `${bookTitle} ?`;
+    deleteWarning_EL.addEventListener('click', function deleteTrue(e2) {
+      if (e2.target.classList.contains('delete')) {
+        let isbm = e.target.parentElement.parentElement.children[0].innerText;
+        // We only want isbm # to find the row to be eliminated
+        book = new Book(null, null, isbm);
+        UIBooks.removeBook(book);
+        deleteWarning_EL.removeEventListener('click', deleteTrue);
+      }
+    });
   }
 });
 search_EL.addEventListener('keyup', UIBooks.searchBook);

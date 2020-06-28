@@ -37,7 +37,7 @@
         <div class="col-12">
           <div class="card">
             <div class="tab-container tabs-classic tabs-center tabs-fill">
-              <ul>
+              <ul id="tab-ul">
                 <li><a>Bookings</a></li>
                 <li><a>Books</a></li>
                 <li><a>Members</a></li>
@@ -70,6 +70,7 @@
                 <!--add book-->
                 <input
                   type="submit"
+                  action="#tab-ul"
                   value="Add Book"
                   class="btn-animated btn-small btn-primary u-fill-width"
                 />
@@ -103,10 +104,13 @@
                     <td>Shakespeare</td>
                     <td class="td-icons">
                       <a
-                        href="#modal-id"
+                        href="#modal-edit"
                         class="fas fa-edit fa-lg hover-grow"
                       ></a>
-                      <span class="fas fa-trash fa-lg hover-grow"></span>
+                      <a
+                        href="#modal-warning"
+                        class="fas fa-trash fa-lg hover-grow"
+                      ></a>
                     </td>
                   </tr>
                   <tr id="body-tr">
@@ -115,10 +119,13 @@
                     <td>Rafael Castillo</td>
                     <td class="td-icons">
                       <a
-                        href="#modal-id"
+                        href="#modal-edit"
                         class="fas fa-edit fa-lg hover-grow"
                       ></a>
-                      <span class="fas fa-trash fa-lg hover-grow"></span>
+                      <a
+                        href="#modal-warning"
+                        class="fas fa-trash fa-lg hover-grow"
+                      ></a>
                     </td>
                   </tr>
                 </tbody>
@@ -130,8 +137,8 @@
         </div>
       </div>
     </div>
-    <!--MODAL-->
-    <div class="modal" id="modal-id">
+    <!--MODALS-->
+    <div class="modal" id="modal-edit">
       <div class="modal-content" role="document">
         <div class="modal-header">
           <h4 class="font-normal u-center title">Edit book</h4>
@@ -150,9 +157,10 @@
             </div>
             <div class="form-section">
               <label class="font-normal"
-                >Book ISBM:<span
-                  class="required fas fa-info-circle hover-grow tooltip tooltip--right"
-                  data-tooltip="ISBM can't be changed, if needed add a new book"
+                >Book ISBM:
+                <span
+                  class="required fas fa-info-circle hover-grow tooltip tooltip--bottom"
+                  data-tooltip="ISBM can't be changed. if needed add a new book"
                 ></span
               ></label>
               <input
@@ -165,16 +173,37 @@
           </form>
         </div>
         <div class="modal-footer">
-          <a class="modal-footer-btn" href="#book-container">
+          <a class="modal-footer-btn" href="#tab-ul">
             <button class="btn-primary save">Save</button>
           </a>
-          <a class="modal-footer-btn" href="#book-container">
+          <a class="modal-footer-btn" href="#NON-EXISTANT-DIV">
+            <button class="btn-secondary cancel">Cancel</button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="modal-warning">
+      <div class="modal-content" role="document">
+        <div class="modal-header">
+          <h4 class="font-normal u-center title">Warning!</h4>
+        </div>
+        <div class="modal-body">
+          <p id="">Are you sure you want to delete </br>
+            <i id="delete-message"></i>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a class="modal-footer-btn" href="#tab-ul">
+            <button class="btn-primary delete">Delete</button>
+          </a>
+          <a class="modal-footer-btn" href="#NON-EXISTANT-DIV">
             <button class="btn-secondary cancel">Cancel</button>
           </a>
         </div>
       </div>
     </div>
     <!--JavaScript-->
-    <script src="app.js"></script>
+    <script src="books.js"></script>
+    <script src="util.js"></script>
   </body>
 </html>

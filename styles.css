@@ -28,13 +28,28 @@ th {
   padding: 1rem;
 }
 
-form {
-  font-size: 1rem;
-}
-
 .table.fixed-head tbody {
   height: 25rem !important;
 }
+.title{
+  padding-top: 2rem;
+}
+.modal-footer-btn{
+  display: inline-block;
+}
+
+/*Fonts*/
+#book-title, 
+#book-author,
+#book-isbm,
+#book-edit-title,
+#book-edit-author,
+#book-edit-isbm,
+#search{
+  font-size: 1rem;
+}
+
+/*Icons*/
 .fa-edit,
 .fa-trash {
   cursor: pointer;
@@ -46,21 +61,6 @@ form {
   transform: scale(1.25) !important;
   transition-duration: .40s !important;
 }
-.title{
-  padding-left: 10rem;
-  padding-right: 10rem;
-  padding-top: 2rem;
+data-tooltip {
+  position:absolute;
 }
-.modal-footer-btn{
-  display: inline-block;
-}
-#book-title, 
-#book-author,
-#book-isbm,
-#book-edit-title,
-#book-edit-author,
-#book-edit-isbm,
-#search{
-  font-size: 1rem;
-}
-
