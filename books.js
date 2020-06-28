@@ -3,7 +3,7 @@
 // BOOKS TAB UI element variable declaration, identification, initialization
 ////////////////////////////////////////////////////////////////////////////////
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-const bookContainer_EL = document.querySelector('#book-container'),
+const bookContainer_EL = document.querySelector('.tab-content'),
   form_EL = document.querySelector('#book-form'),
   bookTableBody_EL = document.querySelector('#book-tbody'),
   edit_body = document.querySelector('#edit-body'),

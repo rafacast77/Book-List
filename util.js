@@ -17,7 +17,7 @@ tabs_ELs.forEach((tab) => {
       tabTarget.classList.remove('active');
     });
     const target = document.querySelector(tab.dataset.tabsTarget);
-    target.className ='active';
+    target.className = 'active';
   });
 });
 

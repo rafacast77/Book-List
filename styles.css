@@ -1,12 +1,12 @@
 /** @format */
-[data-tab-content]{
-  display:none;
+[data-tab-content] {
+  display: none;
 }
-.active[data-tab-content]{
+.active[data-tab-content] {
   display: block;
 }
 #booking-container,
-#members-container{
+#members-container {
   height: 50rem;
 }
 
@@ -41,24 +41,24 @@ th {
 .table.fixed-head tbody {
   height: 25rem !important;
 }
-.title{
+.title {
   padding-top: 2rem;
 }
-.modal-footer-btn{
+.modal-footer-btn {
   display: inline-block;
 }
-.placeholder-title{
+.placeholder-title {
   padding-top: 5rem;
 }
 
 /*Fonts*/
-#book-title, 
+#book-title,
 #book-author,
 #book-isbm,
 #book-edit-title,
 #book-edit-author,
 #book-edit-isbm,
-#search{
+#search {
   font-size: 1rem;
 }
 
@@ -70,13 +70,13 @@ th {
 .fa-trash {
   color: red;
 }
-.fa-exclamation-triangle{
+.fa-exclamation-triangle {
   transform: scale(10);
 }
 .hover-grow:hover {
   transform: scale(1.25) !important;
-  transition-duration: .40s !important;
+  transition-duration: 0.4s !important;
 }
 data-tooltip {
-  position:absolute;
+  position: absolute;
 }
