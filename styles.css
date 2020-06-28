@@ -1,4 +1,14 @@
 /** @format */
+[data-tab-content]{
+  display:none;
+}
+.active[data-tab-content]{
+  display: block;
+}
+#booking-container,
+#members-container{
+  height: 50rem;
+}
 
 .content {
   padding-top: 1.5rem;
@@ -37,6 +47,9 @@ th {
 .modal-footer-btn{
   display: inline-block;
 }
+.placeholder-title{
+  padding-top: 5rem;
+}
 
 /*Fonts*/
 #book-title, 
@@ -56,6 +69,9 @@ th {
 }
 .fa-trash {
   color: red;
+}
+.fa-exclamation-triangle{
+  transform: scale(10);
 }
 .hover-grow:hover {
   transform: scale(1.25) !important;
