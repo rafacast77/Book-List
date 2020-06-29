@@ -28,7 +28,7 @@ class Book {
 class UIBooks {
   static addBookToList(book) {
     const newBook_EL = document.createElement('tr');
-    newBook_EL.id = 'body-tr';
+    newBook_EL.id = 'book-tr';
     newBook_EL.innerHTML = `
     <td>${book.isbm}</td>
     <td>${book.title}</td>
@@ -131,7 +131,7 @@ bookTableBody_EL.addEventListener('click', function (e) {
 });
 // Search Book
 search_EL.addEventListener('keyup', function(e){
-  search(e);
+  search(e, '#book-tr');
 });
 
 

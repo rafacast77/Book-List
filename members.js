@@ -92,3 +92,8 @@ memberForm_EL.addEventListener('submit', function (e) {
 memberTbody_EL.addEventListener('click', function (e) {
   removeRow(e, 'members');
 });
+
+// Search Book
+memberSearch_EL.addEventListener('keyup', function(e){
+  search(e, '#member-tr');
+});

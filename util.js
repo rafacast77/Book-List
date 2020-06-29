@@ -35,10 +35,10 @@ function toastAlert(message, state) {
   }, 2500);
 }
 // Search function
-function search(e) {
+function search(e, bodyTr) {
   const searchText = e.target.value.toLowerCase();
   // Iterates through each tr element in the table body
-  document.querySelectorAll('#body-tr').forEach(function (tr) {
+  document.querySelectorAll(bodyTr).forEach(function (tr) {
     let tdList = tr.children;
     // Iterates through each td element in the tr element and test for match
     for (let td of tdList) {
