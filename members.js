@@ -90,7 +90,7 @@ memberForm_EL.addEventListener('submit', function (e) {
 });
 
 memberTbody_EL.addEventListener('click', function (e) {
-  removeRow(e, 'members');
+  removeRow(e, 'member-tr');
 });
 
 // Search Book

@@ -66,36 +66,25 @@ function create_UUID() {
   return uuid;
 }
 
-function removeRow(e, tav){
-  if(tav === 'books'){
-    let bookTitle = e.target.parentElement.parentElement.children[1].textContent;
-    if (e.target.classList.contains('fa-trash')) {
-      delItemName_EL.textContent = `${bookTitle} ?`;
-      deleteWarning_EL.addEventListener('click', function deleteTrue(e2) {
-        if (e2.target.classList.contains('delete')) {
-          let isbm = e.target.parentElement.parentElement.children[0].innerText;
+function removeRow(e, bodyTr) {
+  let itemName = e.target.parentElement.parentElement.children[1].textContent;
+  delItemName_EL.textContent = `${itemName} ?`;
+  if (e.target.classList.contains('fa-trash')) {
+    deleteWarning_EL.addEventListener('click', function deleteTrue(e2) {
+      if (e2.target.classList.contains('delete')) {
+        let itemId = e.target.parentElement.parentElement.children[0].innerText;
+        if (bodyTr === 'book-tr') {
           // We only want isbm # to find the row to be eliminated
-          book = new Book(null, null, isbm);
+          book = new Book(null, null, itemId);
           UIBooks.removeBook(book);
-          deleteWarning_EL.removeEventListener('click', deleteTrue);
-        }
-      });
-    }
-  } else if (tav === 'members'){
-    let memberName = e.target.parentElement.parentElement.children[1].innerText;
-    if(e.target.classList.contains('fa-trash')){
-      delItemName_EL.textContent = `${memberName} ?`;
-      deleteWarning_EL.addEventListener('click', function deleteTrue(e2){
-        if (e2.target.classList.contains('delete')) {
-          let id = e.target.parentElement.parentElement.children[0].innerText;
-          // We only want id # to find the row to be eliminated
-          const member = new Member(id, null, null, null);
+        } else if (bodyTr === 'member-tr') {
+          const member = new Member(itemId, null, null, null);
           UIMembers.removeMember(member);
-          deleteWarning_EL.removeEventListener('click', deleteTrue);
+        } else {
+          //TODO
         }
-      })
-    }
-  } else{
-    //TODO
+        deleteWarning_EL.removeEventListener('click', deleteTrue);
+      }
+    });
   }
 }

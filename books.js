@@ -59,8 +59,9 @@ class UIBooks {
   }
   static removeBook(book) {
     // Iterates through all rows if ISBM match it edits that row
-    document.querySelectorAll('#body-tr').forEach(function (tr) {
+    document.querySelectorAll('#book-tr').forEach(function (tr) {
       let targetISBM = tr.children[0].innerText;
+      console.log(targetISBM)
       if (book.isbm === targetISBM) {
         tr.remove();
         toastAlert('Book has been removed', 'success');
@@ -127,7 +128,7 @@ bookEditFormEL.addEventListener('click', function (e) {
 });
 // Delete Book
 bookTableBody_EL.addEventListener('click', function (e) {
- removeRow(e, 'books');
+ removeRow(e, 'book-tr');
 });
 // Search Book
 search_EL.addEventListener('keyup', function(e){
