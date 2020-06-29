@@ -1,7 +1,7 @@
 <!-- @format -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="top">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,7 +32,7 @@
     />
   </head>
   <body>
-    <div class="content *-tablet w-90">
+    <div class="content *-tablet w-100">
       <div class="row">
         <div class="col-12">
           <div class="card">
@@ -45,8 +45,8 @@
             </div>
             <!--END TABS CONTAINER  -  -  -  -  -  -  -  -  -  -  -  -  -  - -->
               <div class="tab-content">
-                <div class="active" id="book-container" data-tab-content>
-                  <!--FORM -------------------------------------------------------->
+                <div class="" id="book-container" data-tab-content>
+                  <!--FORM----------------------------------------------------->
                   <form autocomplete="off" id="book-form">
                     <h3 class="u-text-center font-thin title">Add a book</h3>
                     <!--title-->
@@ -71,7 +71,7 @@
                     <!--add book-->
                     <input
                       type="submit"
-                      action="#tab-ul"
+                      href="#tab-ul"
                       value="Add Book"
                       class="btn-animated btn-small btn-primary u-fill-width"
                     />
@@ -89,7 +89,7 @@
                       autocomplete="off"
                     />
                     <!--table head-->
-                    <thead>
+                    <thead id="book-thead">
                       <tr>
                         <th>ISBM#</th>
                         <th>Title</th>
@@ -149,17 +149,121 @@
                 </div>
                 <!--END BOOKING SECTION  -  -  -  -  -  -  -  -  -  -  -  -  -->
               </div>
-                <div class="" id="members-container" data-tab-content>
-                  <div class="placeholder u-fill-width h-100">
-                    <div class="u-center-alt">
-                      <div class="placeholder-icon">
-                          <span class="icon">
-                              <i class="fa fa-wrapper fa-exclamation-triangle fa-3x"></i>
-                          </span>
+                <div class="active" id="members-container" data-tab-content>
+                  <!--FormMembers---------------------------------------------->
+                  <form autocomplete="off" id="members-form">
+                    <h3 class="u-text-center font-thin title">Add a Member</h3>
+                    <div class="row">
+                      <!--name-->
+                      <div class="col-6">
+                        <div class="form-section">
+                          <label class="font-normal"
+                            >Full Name:<span class="required">*</span>
+                          </label>
+                              <input class="input-small" type="name" id="member-name" />
+                        </div>
                       </div>
-                      <h6 class="placeholder-title">The Members area is currently under work.</h6>
-                      <div class="placeholder-subtitle">We ar working hard to finish this page of the app come back in a few days.</div>
+                      <!--phone-->
+                      <div class="col-6 ">
+                    <div class="form-section">
+                      <label class="font-normal">Phone:<span class="required">*</span></label>
+                      <input class="input-small" type="tel" id="members-phone"/>
                     </div>
+                      </div>
+                    </div>
+                    <!--Address-->
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="form-section">
+                              <label class="font-normal">Address:<span class="required">*</span></label>
+                              <input class="input-small" type="text" id="members-address"/>
+                            </div>
+                          </div>
+                        </div>
+                        <!--add member-->
+                        <div class="row">
+                          <div class="col-12" style="padding-top: 1rem;">
+                            <input
+                              type="submit"             
+                              value="Add Member"
+                              class="btn-animated btn-small btn-primary u-fill-width"
+                            />
+                          </div>
+                        </div>   
+                  </form>
+                  <!--TableMember---------------------------------------------->
+                  <table class="table borderless u-text-left fixed-head">
+                    <div class="divider"></div>
+                    <h2 class="u-text-center font-normal">Members</h2>
+                    <!--search bar-->
+                    <input
+                      class="input-small"
+                      type="search"
+                      placeholder="search"
+                      id="member-search"
+                      autocomplete="off"
+                    />
+                    <!--table head-->
+                    <thead id="members-thead">
+                      <tr>
+                        <th>ID #</th>
+                        <th>Name</th>
+                        <th>Phone #</th>
+                        <th class="member-address"><i
+                          class="required fas fa-info-circle fa-lg hover-grow tooltip tooltip--top-left"
+                          style="color: rgba(39, 38, 38, 0.692) !important;"
+                          data-tooltip="Address"
+                        ></i></th>
+                        <th class="td-icon"><i
+                          class="required fas fa-question-circle fa-lg hover-grow tooltip tooltip--top-left"
+                          style="color: rgba(39, 38, 38, 0.692) !important;"
+                          data-tooltip="edit / remove"
+                        ></i></th>
+                      </tr>
+                    </thead>
+                    <!--table body-->
+                    <tbody id="members-tbody">
+                      <tr id="member-tr">
+                        <td>LIB-3E4-67I</td>
+                        <td>Rafael Castillo</td>
+                        <td>07572018284</td>
+                        <td class="member-address td-icon"><i
+                          class="fas fa-info-circle fa-lg hover-grow tooltip tooltip--bottom-left"
+                          data-tooltip="Scotland, Aberdeen, 19 morningside grove AB10-7DJ"
+                        ></i>
+                      </td>
+                        <td class="td-icon">
+                          <a
+                            href="#modal-member-edit"
+                            class="fas fa-edit fa-lg hover-grow"
+                          ></a>
+                          <a
+                            href="#modal-warning"
+                            class="fas fa-trash fa-lg hover-grow"
+                          ></a>
+                        </td>
+                      </tr>
+                      <tr id="member-tr">
+                        <td>LIB-564-67I</td>
+                        <td>Andrea Vasquez</td>
+                        <td>07898035489</td>
+                        <td class="member-address td-icon"><i
+                          class="required fas fa-info-circle fa-lg hover-grow tooltip tooltip--bottom-left"
+                          data-tooltip="Scotland, Aberdeen, 19 morningside grove AB10-7DJ"
+                        ></i></td>
+                        <td class="td-icon">
+                          <a
+                            href="#modal-edit"
+                            class="fas fa-edit fa-lg hover-grow"
+                          ></a>
+                          <a
+                            href="#modal-warning"
+                            class="fas fa-trash fa-lg hover-grow"
+                          ></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
                 </div>
                 <!--END MEMBERS SECTION  -  -  -  -  -  -  -  -  -  -  -  - --->
@@ -225,7 +329,7 @@
           </p>
         </div>
         <div class="modal-footer">
-          <a class="modal-footer-btn" href="#tab-ul">
+          <a class="modal-footer-btn" href="#top">
             <button class="btn-primary delete">Delete</button>
           </a>
           <a class="modal-footer-btn" href="#NON-EXISTANT-DIV">
@@ -236,6 +340,7 @@
     </div>
     <!--JavaScript-->
     <script src="books.js"></script>
-    <script src="util.js"></script>
+    <script src="members.js"></script>
+    <script src="util.js" defer></script>
   </body>
 </html>

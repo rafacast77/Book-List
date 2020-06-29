@@ -78,26 +78,6 @@ class UIBooks {
       }
     });
   }
-  static searchBook(e) {
-    const searchText = e.target.value.toLowerCase();
-    // Iterates through each tr element in the table body
-    document.querySelectorAll('#body-tr').forEach(function (tr) {
-      let tdList = tr.children;
-      // Iterates through each td element in the tr element and test for match
-      for (let td of tdList) {
-        let tdText = td.textContent;
-        if (tdText.toLowerCase().indexOf(searchText) != -1) {
-          tr.style.visibility = 'visible';
-          tr.lastElementChild.style.visibility = 'visible';
-          break;
-        } else {
-          /* TODO find why there is a delay on disappearing the icons cell when collapsing the entire row, it has been temporary fixed by collapsing the element individually/first.*/
-          tr.lastElementChild.style.visibility = 'collapse';
-          tr.style.visibility = 'collapse';
-        }
-      }
-    });
-  }
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Book-Tab Event Listeners
@@ -120,6 +100,7 @@ form_EL.addEventListener('submit', function (e) {
     document.querySelector('#book-author').value = '';
     document.querySelector('#book-isbm').value = '';
   }
+  e.preventDefault();
 });
 // Open Edit-Form
 bookTableBody_EL.addEventListener('click', function (e) {
@@ -146,21 +127,15 @@ bookEditFormEL.addEventListener('click', function (e) {
 });
 // Delete Book
 bookTableBody_EL.addEventListener('click', function (e) {
-  let bookTitle = e.target.parentElement.parentElement.children[1].textContent;
-  if (e.target.classList.contains('fa-trash')) {
-    delItemName_EL.textContent = `${bookTitle} ?`;
-    deleteWarning_EL.addEventListener('click', function deleteTrue(e2) {
-      if (e2.target.classList.contains('delete')) {
-        let isbm = e.target.parentElement.parentElement.children[0].innerText;
-        // We only want isbm # to find the row to be eliminated
-        book = new Book(null, null, isbm);
-        UIBooks.removeBook(book);
-        deleteWarning_EL.removeEventListener('click', deleteTrue);
-      }
-    });
-  }
+ removeRow(e, 'books');
 });
-search_EL.addEventListener('keyup', UIBooks.searchBook);
+// Search Book
+search_EL.addEventListener('keyup', function(e){
+  search(e);
+});
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // MEMBERS TAB
