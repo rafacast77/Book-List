@@ -234,7 +234,7 @@
                       </td>
                         <td class="td-icon">
                           <a
-                            href="#modal-member-edit"
+                            href="#modal-edit"
                             class="fas fa-edit fa-lg hover-grow"
                           ></a>
                           <a
@@ -277,39 +277,37 @@
     <div class="modal" id="modal-edit">
       <div class="modal-content" role="document">
         <div class="modal-header">
-          <h4 class="font-normal u-center title">Edit book</h4>
+          <h4 class="font-normal u-center title" id="modal-edit-title">Edit book</h4>
         </div>
         <div class="modal-body">
-          <form class="form" autocomplete="off" id="book-edit-form">
+          <form class="form" autocomplete="off" id="modal-edit-form">
             <div class="form-section">
-              <label class="font-normal"
-                >Book tittle:<span class="required">*</span></label
+              <label class="font-normal" id="modal-edit-label1"
+                ></label
               >
-              <input class="input-small" type="text" id="book-edit-title" />
+              <input class="input-small" type="text" id="modal-edit-input1" />
             </div>
             <div class="form-section">
-              <label class="font-normal">Book Author:</label>
-              <input class="input-small" type="name" id="book-edit-author" />
+              <label class="font-normal" id="modal-edit-label2"></label>
+              <input class="input-small" type="name" id="modal-edit-input2" />
             </div>
             <div class="form-section">
-              <label class="font-normal"
-                >Book ISBM:
-                <span
-                  class="required fas fa-info-circle hover-grow tooltip tooltip--bottom"
-                  data-tooltip="ISBM can't be changed. if needed add a new book"
-                ></span
-              ></label>
+              <label class="font-normal" id="modal-edit-label3"
+                ></label> <span
+                class="required fas fa-info-circle hover-grow tooltip tooltip--bottom"
+                data-tooltip="Can't be changed. if needed add a new"
+              ></span>
               <input
                 disabled
                 class="input-small"
-                type="number"
-                id="book-edit-isbm"
+                type="text"
+                id="modal-edit-input3"
               />
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <a class="modal-footer-btn" href="#tab-ul">
+          <a class="modal-footer-btn" href="#top">
             <button class="btn-primary save">Save</button>
           </a>
           <a class="modal-footer-btn" href="#NON-EXISTANT-DIV">

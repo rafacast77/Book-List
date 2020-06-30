@@ -39,7 +39,7 @@ class UIMembers {
   </td>
     <td class="td-icon">
       <a
-        href="#modal-member-edit"
+        href="#modal-edit"
         class="fas fa-edit fa-lg hover-grow"
       ></a>
       <a
@@ -51,14 +51,25 @@ class UIMembers {
     memberTbody_EL.appendChild(memberRow);
     toastAlert('New member successfully added', 'success')
   }
-  static editMember(member) {}
+  static editMember(member) {
+    // Iterates through all rows if ISBM match it edits that row
+    document.querySelectorAll('#member-tr').forEach(function (tr) {
+      let targetID = tr.children[0].innerText;
+      if (member.id === targetID) {
+        tr.children[1].textContent = member.name;
+        tr.children[2].textContent = member.phone;
+        tr.children[3].firstChild.dataset.tooltip = member.address;
+        toastAlert('Member successfully edited', 'success');
+      }
+    });
+  }
   static removeMember(member) {
     // Iterates through all rows if Member ID match it deletes that row
     document.querySelectorAll('#member-tr').forEach(function (tr) {
       let targetID = tr.children[0].innerText;
       if (member.id === targetID) {
         tr.remove();
-        toastAlert('Member has been removed', 'success');
+        toastAlert('Member successfully removed', 'success');
       }
     });
   }
@@ -71,6 +82,7 @@ class UIMembers {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Book-Tab Event Listeners
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Add Member
 memberForm_EL.addEventListener('submit', function (e) {
   const name = memberName_EL.value,
     phone = memberPhone_EL.value,
@@ -88,12 +100,28 @@ memberForm_EL.addEventListener('submit', function (e) {
 
   e.preventDefault;
 });
-
+// Delete Member
 memberTbody_EL.addEventListener('click', function (e) {
   removeRow(e, 'member-tr');
 });
-
-// Search Book
+// Open Edit-Modal
+memberTbody_EL.addEventListener('click', function (e) {
+  editRow(e, 'member-tr');
+});
+// Edit Member
+modalEditFooter_EL.addEventListener('click', function(e){
+  const modalEditInput4_EL = document.querySelector('#modal-edit-input4');
+  if (e.target.classList.contains('save')) {
+    const name = modalEditInput1_EL.value,
+      phone = modalEditInput2_EL.value,
+      id = modalEditInput3_EL.value,
+      address = modalEditInput4_EL.value,
+      member = new Member(id, name, phone, address);
+    UIMembers.editMember(member);
+  } 
+  modalEditInput4_EL.parentElement.remove();
+})
+// Search Member
 memberSearch_EL.addEventListener('keyup', function(e){
   search(e, '#member-tr');
 });

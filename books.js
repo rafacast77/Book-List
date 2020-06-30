@@ -4,13 +4,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 const bookContainer_EL = document.querySelector('.tab-content'),
+  modalEditFooter_EL = document.querySelector('.modal-footer'),
   form_EL = document.querySelector('#book-form'),
   bookTableBody_EL = document.querySelector('#book-tbody'),
   edit_body = document.querySelector('#edit-body'),
-  bookEditTitle_EL = document.querySelector('#book-edit-title'),
-  bookEditAuthor_EL = document.querySelector('#book-edit-author'),
-  bookEditIsbm_EL = document.querySelector('#book-edit-isbm'),
-  bookEditFormEL = document.querySelector('#modal-edit'),
   deleteWarning_EL = document.querySelector('#modal-warning'),
   delItemName_EL = document.querySelector('#delete-message'),
   search_EL = document.querySelector('#search');
@@ -61,7 +58,7 @@ class UIBooks {
     // Iterates through all rows if ISBM match it edits that row
     document.querySelectorAll('#book-tr').forEach(function (tr) {
       let targetISBM = tr.children[0].innerText;
-      console.log(targetISBM)
+      console.log(targetISBM);
       if (book.isbm === targetISBM) {
         tr.remove();
         toastAlert('Book has been removed', 'success');
@@ -70,7 +67,7 @@ class UIBooks {
   }
   static editBook(book) {
     // Iterates through all rows if ISBM match it edits that row
-    document.querySelectorAll('#body-tr').forEach(function (tr) {
+    document.querySelectorAll('#book-tr').forEach(function (tr) {
       let targetISBM = tr.children[0].innerText;
       if (book.isbm === targetISBM) {
         tr.children[1].textContent = book.title;
@@ -103,24 +100,16 @@ form_EL.addEventListener('submit', function (e) {
   }
   e.preventDefault();
 });
-// Open Edit-Form
+// Open Edit-Modal
 bookTableBody_EL.addEventListener('click', function (e) {
-  // loads the edit-form with current values
-  if (e.target.classList.contains('fa-edit')) {
-    bookEditIsbm_EL.value =
-      e.target.parentElement.parentElement.children[0].innerText;
-    bookEditTitle_EL.value =
-      e.target.parentElement.parentElement.children[1].innerText;
-    bookEditAuthor_EL.value =
-      e.target.parentElement.parentElement.children[2].innerText;
-  }
+  editRow(e, 'book-tr');
 });
 // Edit Book
-bookEditFormEL.addEventListener('click', function (e) {
+modalEditFooter_EL.addEventListener('click', function (e) {
   if (e.target.classList.contains('save')) {
-    const title = document.querySelector('#book-edit-title').value,
-      author = document.querySelector('#book-edit-author').value,
-      isbm = document.querySelector('#book-edit-isbm').value,
+    const title = modalEditInput1_EL.value,
+      author = modalEditInput2_EL.value,
+      isbm = modalEditInput3_EL.value,
       book = new Book(title, author, isbm);
 
     UIBooks.editBook(book);
@@ -128,15 +117,12 @@ bookEditFormEL.addEventListener('click', function (e) {
 });
 // Delete Book
 bookTableBody_EL.addEventListener('click', function (e) {
- removeRow(e, 'book-tr');
+  removeRow(e, 'book-tr');
 });
 // Search Book
-search_EL.addEventListener('keyup', function(e){
+search_EL.addEventListener('keyup', function (e) {
   search(e, '#book-tr');
 });
-
-
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // MEMBERS TAB

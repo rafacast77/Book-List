@@ -3,7 +3,14 @@
 const card = document.querySelector('.card'),
   tab_EL = document.querySelector('.tab-container'),
   tabs_ELs = document.querySelectorAll('[data-tabs-target]'),
-  tabContent_ELs = document.querySelectorAll('[data-tab-content');
+  tabContent_ELs = document.querySelectorAll('[data-tab-content'),
+  modalLabel1_EL = document.querySelector('#modal-edit-label1'),
+  modalLabel2_EL = document.querySelector('#modal-edit-label2'),
+  modalLabel3_EL = document.querySelector('#modal-edit-label3'),
+  modalEditInput1_EL = document.querySelector('#modal-edit-input1'),
+  modalEditInput2_EL = document.querySelector('#modal-edit-input2'),
+  modalEditInput3_EL = document.querySelector('#modal-edit-input3'),
+  modalEditForm_EL = document.querySelector('#modal-edit-form');
 
 // Tab navigation
 tabs_ELs.forEach((tab) => {
@@ -66,19 +73,20 @@ function create_UUID() {
   return uuid;
 }
 
+// Modal-Remove
 function removeRow(e, bodyTr) {
-  let itemName = e.target.parentElement.parentElement.children[1].textContent;
-  delItemName_EL.textContent = `${itemName} ?`;
   if (e.target.classList.contains('fa-trash')) {
+    let itemName = e.target.parentElement.parentElement.children[1].textContent;
+    delItemName_EL.textContent = `${itemName} ?`;
     deleteWarning_EL.addEventListener('click', function deleteTrue(e2) {
       if (e2.target.classList.contains('delete')) {
-        let itemId = e.target.parentElement.parentElement.children[0].innerText;
+        let id = e.target.parentElement.parentElement.children[0].textContent;
+        // We only want IDs # to find the row to be eliminated
         if (bodyTr === 'book-tr') {
-          // We only want isbm # to find the row to be eliminated
-          book = new Book(null, null, itemId);
+          book = new Book(null, null, id);
           UIBooks.removeBook(book);
         } else if (bodyTr === 'member-tr') {
-          const member = new Member(itemId, null, null, null);
+          const member = new Member(id, null, null, null);
           UIMembers.removeMember(member);
         } else {
           //TODO
@@ -86,5 +94,33 @@ function removeRow(e, bodyTr) {
         deleteWarning_EL.removeEventListener('click', deleteTrue);
       }
     });
+  }
+}
+// Modal-Edit
+function editRow(e, bodyTr) {
+  if (e.target.classList.contains('fa-edit')) {
+    modalEditInput3_EL.value =
+      e.target.parentElement.parentElement.children[0].innerText;
+    modalEditInput1_EL.value =
+      e.target.parentElement.parentElement.children[1].innerText;
+    modalEditInput2_EL.value =
+      e.target.parentElement.parentElement.children[2].innerText;
+    if (bodyTr === 'member-tr') {
+      modalLabel1_EL.textContent = 'Name:';
+      modalLabel2_EL.textContent = 'Phone:';
+      modalLabel3_EL.textContent = 'Member ID:';
+      modalEditForm_EL.insertAdjacentHTML('beforeend',
+        `
+      <div class="form-section">
+        <label class="font-normal" >Address:</label>
+        <input class="input-small" type="name" id="modal-edit-input4" value="${e.target.parentElement.parentElement.children[3].firstChild.dataset.tooltip}"/>
+      </div>
+      `
+      );
+    } else if (bodyTr === 'book-tr') {
+      modalLabel1_EL.textContent = 'Book tittle:';
+      modalLabel2_EL.textContent = 'Book Author:';
+      modalLabel3_EL.textContent = 'Book ISBM:';
+    }
   }
 }
