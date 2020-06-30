@@ -33,6 +33,56 @@ body {
 #book-tbody td {
   width: 30%;
 }
+#name {
+  width: 30%;
+  max-width: 20%;
+}
+#id {
+  width: 10%;
+  max-width: 10%;
+}
+#memberth {
+  width: 40%;
+}
+#returnh {
+  font-size: 0.9;
+  padding-left: 5px;
+  padding-right: 1px;
+  padding-top: 16px;
+  width: 15%;
+}
+#return {
+  padding-left: 5px;
+  padding-right: 1px;
+  padding-top: 7px;
+  width: 15%;
+}
+#titleth {
+  width: 40%;
+  text-align: start;
+  padding-left: 0px;
+}
+#return-stateth {
+  width: 15%;
+  text-align: center;
+  padding-right: 5px;
+  max-width: 15%;
+}
+#return-state {
+  width: 15%;
+
+  padding-right: 10px;
+  max-width: 15%;
+}
+#titl {
+  width: 40%;
+  max-width: 40%;
+}
+#isbm {
+  width: 10%;
+  max-width: 10%;
+}
+
 #members-thead th,
 #members-tbody td {
   width: 30%;
@@ -55,6 +105,7 @@ body {
 }
 .title {
   padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 td {
   font-size: 0.9rem;
@@ -64,7 +115,8 @@ td {
 .fa-edit,
 .fa-trash,
 .fa-info-circle,
-.fa-question-circle {
+.fa-question-circle,
+.tag-info {
   cursor: pointer;
 }
 .fa-info-circle {
@@ -74,7 +126,7 @@ td {
   color: rgb(61, 170, 243) !important;
 }
 .fa-edit:hover {
-  color: rgb(4, 172, 26) !important;
+  color: #0dd157 !important;
 }
 .fa-trash {
   color: rgba(255, 100, 100, 0.719);
@@ -87,8 +139,9 @@ td {
   color: red;
 }
 .fa-edit {
-  color: rgba(15, 168, 36, 0.63) !important;
+  color: #0dd158ad !important;
 }
+
 .hover-grow:hover {
   transform: scale(1.25) !important;
   transition-duration: 0.4s !important;
@@ -96,4 +149,26 @@ td {
 /* Modals */
 .modal-footer-btn {
   display: inline-block;
+}
+
+/* Buttons */
+.btn-return {
+  font-weight: bold;
+  color: rgba(36, 35, 35, 0.747) !important;
+  background-color: rgba(230, 227, 227, 0.733) !important;
+}
+.btn-return:hover {
+  color: #0dd158fb !important;
+  background-color: rgba(230, 227, 227, 0.733) !important;
+}
+.tag-info {
+  background-color: #2972faaf !important;
+  color: white !important;
+}
+.tag-info:hover {
+  background-color: #2972fa !important;
+  color: white !important;
+}
+.btn-primary {
+  font-size: 14px !important;
 }
