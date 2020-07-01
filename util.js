@@ -12,6 +12,7 @@ const card = document.querySelector('.card'),
   modalEditInput3_EL = document.querySelector('#modal-edit-input3'),
   modalEditForm_EL = document.querySelector('#modal-edit-form');
 
+  document.addEventListener('DOMContentLoaded', addDummyInfo());
 // Tab navigation
 tabs_ELs.forEach((tab) => {
   tab.addEventListener('click', function (e) {
@@ -65,11 +66,12 @@ function search(e, bodyTr) {
 // Creates a random ID
 function create_UUID() {
   var dt = new Date().getTime();
-  var uuid = 'LIB-xxx-xxx'.replace(/[xy]/g, function (c) {
+  var uuid = 'LIB20-xxx-xxx'.replace(/[xy]/g, function (c) {
     var r = (dt + Math.random() * 16) % 16 | 0;
     dt = Math.floor(dt / 16);
     return (c == 'x' ? r : (r & 0x3) | 0x8).toString(16);
   });
+
   return uuid;
 }
 
@@ -109,7 +111,8 @@ function editRow(e, bodyTr) {
       modalLabel1_EL.textContent = 'Name:';
       modalLabel2_EL.textContent = 'Phone:';
       modalLabel3_EL.textContent = 'Member ID:';
-      modalEditForm_EL.insertAdjacentHTML('beforeend',
+      modalEditForm_EL.insertAdjacentHTML(
+        'beforeend',
         `
       <div class="form-section">
         <label class="font-normal" >Address:</label>
@@ -123,4 +126,115 @@ function editRow(e, bodyTr) {
       modalLabel3_EL.textContent = 'Book ISBM:';
     }
   }
+}
+
+// Adds Dummy Information for testing
+function addDummyInfo() {
+    member1 = new Member(
+      'LIB20-829-955',
+      'Jamie Muir',
+      '070-3162-8890',
+      'SALFORD  62 Wade Lane M5 7BH'
+    ),
+    member2 = new Member(
+      'LIB20-f97-47e',
+      'Rafael Castillo',
+      '075-7201-8284',
+      'Aberdeen  19 Morningside Grove AB10 7DJ'
+    ),
+    member3 = new Member(
+      'LIB20-f32-9c2',
+      '	Natasha Alexander',
+      '078-7360-4056',
+      'LONDON  90 Guild Street EC4V 1XP'
+    ),
+    member4 = new Member(
+      'LIB20-992-7cc',
+      'Lily Z Bryant',
+      '078-4486-4763',
+      'GLASGOW  72 Nith Street G2 5UY'
+    ),
+    member5 = new Member(
+      'LIB20-0ac-54c',
+      '	Taylor Dennis',
+      '070-7356-6001',
+      'EDINBURGH  92 Park Row EH8 7JR'
+    ),
+    member6 = new Member(
+      'LIB20-48a-cb3',
+      'Francesco Gruosso',
+      '077-7198-1330',
+      'MANCHESTER  22 Cunnery Rd M60 3WG'
+    ),
+    member7 = new Member(
+      'LIB20-5cb-f7d',
+      'Elizabeth Hale',
+      '079-8401-3433',
+      'LIVERPOOL 47 Overton Circle L3 3ZB'
+    );
+  const book1 = new Book('Siddhartha', 'Hermann Hesse', '978-0-141-18957-4'),
+    book2 = new Book('Inner Engineering', 'Sadhguru', '978-0-143-42884-8'),
+    book3 = new Book("Can't Hurt Me", 'David Goggins', '978-1-544-50785-9'),
+    book4 = new Book(
+      'The Celestine Prophecy',
+      'James Redfield',
+      '978-0-553-40902-4'
+    ),
+    book5 = new Book(
+      '12 Rules for Life',
+      'Jordan B. Peterson',
+      '978-0-141-98851-1'
+    ),
+    book6 = new Book(
+      'Manual Of The Warrior Of Light',
+      'Paulo Coelho',
+      '978-0-00-715632-0'
+    ),
+    book7 = new Book(
+      'How to Think Like a Programmer for Problem Solving',
+      'Paul Vickers',
+      '978-1-844-80900-4'
+    ),
+    book8 = new Book(
+      'The Four Agreements: Practical Guide to Personal Freedom',
+      'Don Miguel Ruiz',
+      '978-1-878424-31-0'
+    ),
+    book9 = new Book(
+      'Nineteen Eighty-Four 1984',
+      'George Orwell',
+      '978-0-141-18776-1'
+    ),
+    book10 = new Book('The Alchemist', 'Paulo Coelho', '978-0-7225-3293-5'),
+    book11 = new Book('Brave New World', 'Aldous Huxley', '978-0-099-51847-1');
+
+  const library = [
+      book1,
+      book2,
+      book3,
+      book4,
+      book5,
+      book6,
+      book7,
+      book8,
+      book9,
+      book10,
+      book11,
+    ];
+    members = [
+      member1,
+      member2,
+      member3,
+      member4,
+      member5,
+      member6,
+      member7
+    ];
+    library.forEach(book =>{
+      UIBooks.addBook(book);
+    })
+    members.forEach(member =>{
+      UIMembers.addMember(member);
+    })
+
 }

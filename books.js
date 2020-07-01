@@ -23,26 +23,28 @@ class Book {
   }
 }
 class UIBooks {
-  static addBookToList(book) {
+  static addBook(book) {
     const newBook_EL = document.createElement('tr');
     newBook_EL.id = 'book-tr';
     newBook_EL.innerHTML = `
     <td>${book.isbm}</td>
     <td>${book.title}</td>
     <td>${book.author}</td>
-    <td class="td-icons">
-      <a
-      href="#modal-edit"
-      class="fas fa-edit fa-lg hover-grow"
-      ></a>
-      <a
-      href="#modal-warning"
-      class="fas fa-trash fa-lg hover-grow"
-      ></a>
+    <td class="options-td">
+      <div id="options-icons">
+        <a
+          href="#modal-edit"
+          class="fas fa-edit fa-lg hover-grow"
+        ></a>
+        <a
+          href="#modal-warning"
+          class="fas fa-trash fa-lg hover-grow"
+        ></a>
+      </div>
     </td>
     `;
     bookTableBody_EL.appendChild(newBook_EL);
-    toastAlert('A new Book has been added', 'success');
+    //toastAlert('A new Book has been added', 'success');
   }
   static requiredMissing(book) {
     if (book.title === '' || book.isbm === '') {
@@ -92,7 +94,7 @@ form_EL.addEventListener('submit', function (e) {
   } else if (UIBooks.invalidISBM(book)) {
     toastAlert('ISBM must be between 10 to 13 characters', 'error');
   } else {
-    UIBooks.addBookToList(book);
+    UIBooks.addBook(book);
 
     document.querySelector('#book-title').value = '';
     document.querySelector('#book-author').value = '';

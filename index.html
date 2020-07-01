@@ -112,41 +112,32 @@
                         <th>ISBM#</th>
                         <th>Title</th>
                         <th>Author</th>
-                        <th class="td-small"></th>
+                        <th class="options-th"><i
+                          class="required fas fa-question-circle fa-lg hover-grow tooltip tooltip--top-left"
+                          style="color: rgba(39, 38, 38, 0.692) !important;"
+                          data-tooltip="Edit / Remove"
+                        ></i></th>
                       </tr>
                     </thead>
                     <!--table body-->
                     <tbody id="book-tbody">
-                      <tr id="book-tr">
+                      <!--<tr id="book-tr">
                         <td>1234567890123</td>
                         <td>Romeo and Juliet</td>
                         <td>Shakespeare</td>
-                        <td class="td-icons">
-                          <a
-                            href="#modal-edit"
-                            class="fas fa-edit fa-lg hover-grow"
-                          ></a>
-                          <a
-                            href="#modal-warning"
-                            class="fas fa-trash fa-lg hover-grow"
-                          ></a>
+                        <td class="options-td">
+                          <div id="options-icons">
+                            <a
+                              href="#modal-edit"
+                              class="fas fa-edit fa-lg hover-grow"
+                            ></a>
+                            <a
+                              href="#modal-warning"
+                              class="fas fa-trash fa-lg hover-grow"
+                            ></a>
+                          </div>
                         </td>
-                      </tr>
-                      <tr id="book-tr">
-                        <td>569873216852</td>
-                        <td>El Gato con Botas</td>
-                        <td>Rafael Castillo</td>
-                        <td class="td-icons">
-                          <a
-                            href="#modal-edit"
-                            class="fas fa-edit fa-lg hover-grow"
-                          ></a>
-                          <a
-                            href="#modal-warning"
-                            class="fas fa-trash fa-lg hover-grow"
-                          ></a>
-                        </td>
-                      </tr>
+                      </tr>-->     
                     </tbody>
                   </table>
                 </div>
@@ -203,28 +194,28 @@
                     <!--table head-->
                     <thead id="bookings-thead">
                       <tr>       
-                        <th id="memberth">Member</th>         
-                        <th id="titleth">Book</th>
-                        <th id="return-stateth">Return State</th>
-                        <th id="returnh">Returns</th>
+                        <th id="member-th">Member</th>         
+                        <th id="booking-book-th">Book</th>
+                        <th id="return-state-th">Return</th>
+                        <th id="return-th"></th>
                       </tr>
                     </thead>
                     <!--table body-->
                     <tbody id="booking-tbody">
                       <tr id="booking-tr">
                         <!--member-->
-                        <td id="id"><div class="tag tag--large tag-info">ID</div></td>
-                        <td id="name">Rafael Castillo</td>
+                        <td id="id-td"><div class="tag tag-info hover-grow">ID</div></td>
+                        <td id="name-td">Rafael Castillo</td>
                         <!--book-->
-                        <td id="isbm"><div class="tag tag--large tag-info">ISBM</div></td>
-                        <td id="titl">How to think like a programmer</td>
+                        <td id="booking-isbm-th"><div class="tag tag-info hover-grow">ISBM</div></td>
+                        <td id="booking-tittle-td">How to think like a programmer</td>
                         <!--Return State-->
-                        <td id="return-state">
-                          <span>Late</span>
+                        <td id="return-state-td">
+                          <div class="tag tag--success hover-grow">On Time</div>
                         </td>
                         <!--Return Button-->
-                        <td id="return">
-                          <button class="btn btn-return btn-small">Return</button>
+                        <td id="return-btn-td">
+                          <button class="btn btn-return u-no-margin btn-small">Return</button>
                         </td>
                       </tr>
                     </tbody>
@@ -292,62 +283,44 @@
                     <!--table head-->
                     <thead id="members-thead">
                       <tr>
-                        <th>ID #</th>
+                        <th>ID#</th>
                         <th>Name</th>
                         <th>Phone #</th>
-                        <th class="member-address"><i
+                        <th class="member-address-th"><i
                           class="required fas fa-info-circle fa-lg hover-grow tooltip tooltip--top-left"
                           style="color: rgba(39, 38, 38, 0.692) !important;"
                           data-tooltip="Address"
                         ></i></th>
-                        <th class="td-icon"><i
+                        <th class="options-th"><i
                           class="required fas fa-question-circle fa-lg hover-grow tooltip tooltip--top-left"
                           style="color: rgba(39, 38, 38, 0.692) !important;"
-                          data-tooltip="edit / remove"
+                          data-tooltip="Edit / Remove"
                         ></i></th>
                       </tr>
                     </thead>
                     <!--table body-->
                     <tbody id="members-tbody">
-                      <tr id="member-tr">
-                        <td>LIB-3E4-67I</td>
-                        <td>Rafael Castillo</td>
-                        <td>07572018284</td>
-                        <td class="member-address td-icon"><i
-                          class="fas fa-info-circle fa-lg hover-grow tooltip tooltip--bottom-left"
-                          data-tooltip="Scotland, Aberdeen, 19 morningside grove AB10-7DJ"
-                        ></i>
-                      </td>
-                        <td class="td-icon">
-                          <a
-                            href="#modal-edit"
-                            class="fas fa-edit fa-lg hover-grow"
-                          ></a>
-                          <a
-                            href="#modal-warning"
-                            class="fas fa-trash fa-lg hover-grow"
-                          ></a>
-                        </td>
-                      </tr>
-                      <tr id="member-tr">
-                        <td>LIB-564-67I</td>
+                      <!--<tr id="member-tr">
+                        <td>LIB20-564-67I</td>
                         <td>Andrea Vasquez</td>
-                        <td>07898035489</td>
-                        <td class="member-address td-icon"><i
+                        <td>078-9803-5489</td>
+                        <td class="member-address"><i
                           class="required fas fa-info-circle fa-lg hover-grow tooltip tooltip--bottom-left"
                           data-tooltip="Scotland, Aberdeen, 19 morningside grove AB10-7DJ"
                         ></i></td>
-                        <td class="td-icon">
-                          <a
-                            href="#modal-edit"
-                            class="fas fa-edit fa-lg hover-grow"
-                          ></a>
-                          <a
-                            href="#modal-warning"
-                            class="fas fa-trash fa-lg hover-grow"
-                          ></a>
+                        <td class="options-td">
+                          <div id="options-icons">
+                            <a
+                              href="#modal-edit"
+                              class="fas fa-edit fa-lg hover-grow"
+                            ></a>
+                            <a
+                              href="#modal-warning"
+                              class="fas fa-trash fa-lg hover-grow"
+                            ></a>
+                          </div>
                         </td>
-                      </tr>
+                      </tr>-->
                     </tbody>
                   </table>
                 </div>
@@ -379,7 +352,7 @@
             </div>
             <div class="form-section">
               <label class="font-normal" id="modal-edit-label3"
-                ></label> <span
+                ></label><span
                 class="required fas fa-info-circle hover-grow tooltip tooltip--bottom"
                 data-tooltip="Can't be changed. if needed add a new"
               ></span>

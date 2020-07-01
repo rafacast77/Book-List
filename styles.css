@@ -1,24 +1,30 @@
 /** @format */
-[/* Tab Navigation*/
-  data-tab-content] {
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// GENERAL CONTENT
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+/* Tab Navigation*/
+[data-tab-content] {
   display: none;
 }
 .active[data-tab-content] {
   display: block;
 }
 
-/* Place Holder */
-#booking-container {
-  height: 50rem;
+@media screen and (min-width: 1024px) {
+  .content {
+
+  }
 }
-.placeholder-title {
-  padding-top: 5rem;
+@media screen and (max-width: 768px) {
+  td {
+    font-size: 13px !important;
+  }
+  th {
+    font-size: 14px !important;
+  }
 }
 
-/* General Content*/
-.content {
-  transform: scale(0.9);
-}
 body {
   background-image: url('library.jpg');
   background-size: cover;
@@ -27,72 +33,26 @@ body {
 .card {
   padding: 1rem;
 }
-
-/* TABLES */
-#book-thead th,
-#book-tbody td {
-  width: 30%;
+/* Modals */
+.modal-footer-btn {
+  display: inline-block;
 }
-#name {
-  width: 30%;
-  max-width: 20%;
-}
-#id {
-  width: 10%;
-  max-width: 10%;
-}
-#memberth {
-  width: 40%;
-}
-#returnh {
-  font-size: 0.9;
-  padding-left: 5px;
-  padding-right: 1px;
-  padding-top: 16px;
-  width: 15%;
-}
-#return {
-  padding-left: 5px;
-  padding-right: 1px;
-  padding-top: 7px;
-  width: 15%;
-}
-#titleth {
-  width: 40%;
-  text-align: start;
-  padding-left: 0px;
-}
-#return-stateth {
-  width: 15%;
-  text-align: center;
-  padding-right: 5px;
-  max-width: 15%;
-}
-#return-state {
-  width: 15%;
-
-  padding-right: 10px;
-  max-width: 15%;
-}
-#titl {
-  width: 40%;
-  max-width: 40%;
-}
-#isbm {
-  width: 10%;
-  max-width: 10%;
-}
-
-#members-thead th,
-#members-tbody td {
-  width: 30%;
-}
-.td-icon {
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// TABLES
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+td,
+th {
+  padding: 12px !important;
 }
 .table.fixed-head tbody {
   height: 25rem !important;
 }
-/*Fonts*/
+tr:hover {
+  background-color: rgba(226, 225, 225, 0.685) !important;
+}
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// FONTS
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
 #book-title,
 #book-author,
 #book-isbm,
@@ -110,14 +70,13 @@ body {
 td {
   font-size: 0.9rem;
 }
-
-/*Icons*/
-.fa-edit,
-.fa-trash,
-.fa-info-circle,
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// ICONS
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+.tag,
 .fa-question-circle,
-.tag-info {
-  cursor: pointer;
+.fa-info-circle {
+  cursor: help;
 }
 .fa-info-circle {
   color: rgba(61, 170, 243, 0.719) !important;
@@ -125,41 +84,40 @@ td {
 .fa-info-circle:hover {
   color: rgb(61, 170, 243) !important;
 }
+.hover-grow:hover {
+  transform: scale(1.25) !important;
+  transition-duration: 0.4s !important;
+}
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// BUTTONS
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+.fa-edit,
+.fa-trash {
+  cursor: pointer;
+}
+.fa-edit {
+  padding-right: 15px !important;
+  color: #0dd158ad !important;
+}
 .fa-edit:hover {
   color: #0dd157 !important;
 }
 .fa-trash {
   color: rgba(255, 100, 100, 0.719);
-  padding-right: 0.5rem;
-}
-.fa-exclamation-triangle {
-  transform: scale(10);
 }
 .fa-trash:hover {
   color: red;
 }
-.fa-edit {
-  color: #0dd158ad !important;
-}
-
-.hover-grow:hover {
-  transform: scale(1.25) !important;
-  transition-duration: 0.4s !important;
-}
-/* Modals */
-.modal-footer-btn {
-  display: inline-block;
-}
-
-/* Buttons */
 .btn-return {
   font-weight: bold;
   color: rgba(36, 35, 35, 0.747) !important;
   background-color: rgba(230, 227, 227, 0.733) !important;
+  transition-duration: 0.6s !important;
 }
 .btn-return:hover {
-  color: #0dd158fb !important;
-  background-color: rgba(230, 227, 227, 0.733) !important;
+  color: white!important;
+  background-color: rgba(41, 39, 39, 0.842) !important;
 }
 .tag-info {
   background-color: #2972faaf !important;
@@ -171,4 +129,68 @@ td {
 }
 .btn-primary {
   font-size: 14px !important;
+}
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// FIXES
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+/*Fixes alignment when scroll bar appears and moves the tbody
+away from the thead in all tables*/
+tbody {
+  overflow: -moz-scrollbars-vertical !important;
+  overflow-y: scroll !important;
+}
+.member-address-th {
+  width: 1% !important;
+  padding-right: 2rem !important;
+}
+.member-address {
+  width: 1% !important;
+}
+.options-th {
+  padding-right: 2.8rem !important;
+  width: 1% !important;
+}
+.options-td {
+  width: 1% !important;
+}
+#options-icons {
+  display: inline-flex !important;
+  padding-top: 0.3rem;
+}
+th,
+td {
+  width: 30%;
+}
+#id-td {
+  width: 1% !important;
+}
+#booking-book-th {
+  padding-right: 7.3rem !important;
+}
+#booking-isbm-th {
+  width: 1% !important;
+}
+#return-state-th {
+  width: 1% !important;
+  text-align: center;
+  padding-right: 0.9rem !important;
+  padding-left: 0.9rem !important;
+}
+#return-state-td {
+  width: 1% !important;
+}
+#return-th {
+  padding-right: 5.8rem !important;
+  width: 1%;
+}
+#return-btn-td {
+  padding-top: 7px !important;
+  width: 1% !important;
+  height: 1% !important;
+}
+#return-btn-td,
+#return-state-td,
+#booking-isbm-th,
+#id-td {
+  vertical-align: start;
 }

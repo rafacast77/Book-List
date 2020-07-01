@@ -21,7 +21,28 @@ class Member {
     this.name = name;
     this.phone = phone;
     this.address = address;
+    this.bookings = [];
   }
+  // Adds a book to a member
+ booking(book){
+   if(this.bookings.length >= 3){
+     return false;
+   } else{
+     this.bookings.push(book);
+    return true;
+   }
+ }
+ // removes a book from a member
+ returnBook(bookToReturn){
+   this.bookings.forEach(bookRented => {
+     if(bookRented.isbn === book.isbn){
+       this.booking.splice(this.bookings.indexOf(bookRented));
+       return true;
+     } else{
+       return false;
+     }
+   })
+ }
 }
 class UIMembers {
   static addMember(member) {
@@ -36,20 +57,22 @@ class UIMembers {
       class="required fas fa-info-circle fa-lg hover-grow tooltip tooltip--bottom-left"
       data-tooltip="${member.address}"
     ></i>
-  </td>
-    <td class="td-icon">
-      <a
-        href="#modal-edit"
-        class="fas fa-edit fa-lg hover-grow"
-      ></a>
-      <a
-        href="#modal-warning"
-        class="fas fa-trash fa-lg hover-grow"
-      ></a>
+    </td>
+    <td class="member-options-td">
+      <div id="options-icons">
+        <a
+          href="#modal-edit"
+          class="fas fa-edit fa-lg hover-grow"
+        ></a>
+        <a
+          href="#modal-warning"
+          class="fas fa-trash fa-lg hover-grow"
+        ></a>
+      </div>
     </td>
     `;
     memberTbody_EL.appendChild(memberRow);
-    toastAlert('New member successfully added', 'success')
+    //toastAlert('New member successfully added', 'success')
   }
   static editMember(member) {
     // Iterates through all rows if ISBM match it edits that row
