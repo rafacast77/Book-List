@@ -20,6 +20,7 @@ class Book {
     this.title = title;
     this.author = author;
     this.isbm = isbm;
+    this.booked = false;
   }
 }
 class UIBooks {
@@ -27,7 +28,7 @@ class UIBooks {
     const newBook_EL = document.createElement('tr');
     newBook_EL.id = 'book-tr';
     newBook_EL.innerHTML = `
-    <td>${book.isbm}</td>
+    <td><span class="far fa-copy hover-grow tooltip tooltip--bottom-right" data-tooltip="Copy ISBN"></span>${book.isbm}</td>
     <td>${book.title}</td>
     <td>${book.author}</td>
     <td class="options-td">
@@ -104,7 +105,15 @@ form_EL.addEventListener('submit', function (e) {
 });
 // Open Edit-Modal
 bookTableBody_EL.addEventListener('click', function (e) {
-  editRow(e, 'book-tr');
+  if (e.target.classList.contains('fa-edit')) {
+    editRow(e, 'book-tr');
+  }
+  if (e.target.classList.contains('fa-trash')) {
+    removeRow(e, 'book-tr');
+  }
+  if(e.target.classList.contains('fa-copy')){
+    copyToClipboard(e);
+  }
 });
 // Edit Book
 modalEditFooter_EL.addEventListener('click', function (e) {
@@ -116,10 +125,6 @@ modalEditFooter_EL.addEventListener('click', function (e) {
 
     UIBooks.editBook(book);
   }
-});
-// Delete Book
-bookTableBody_EL.addEventListener('click', function (e) {
-  removeRow(e, 'book-tr');
 });
 // Search Book
 search_EL.addEventListener('keyup', function (e) {
@@ -141,17 +146,3 @@ search_EL.addEventListener('keyup', function (e) {
 // Book-Tab Event Listeners
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-////////////////////////////////////////////////////////////////////////////////
-// BOOKINGS TAB
-////////////////////////////////////////////////////////////////////////////////
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Books-Tab UI element variable declaration, identification, initialization
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Book-Tab Objects and Functions
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Book-Tab Event Listeners
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -21,36 +21,16 @@ class Member {
     this.name = name;
     this.phone = phone;
     this.address = address;
-    this.bookings = [];
+    this.bookingLimit = 0;
   }
-  // Adds a book to a member
- booking(book){
-   if(this.bookings.length >= 3){
-     return false;
-   } else{
-     this.bookings.push(book);
-    return true;
-   }
- }
- // removes a book from a member
- returnBook(bookToReturn){
-   this.bookings.forEach(bookRented => {
-     if(bookRented.isbn === book.isbn){
-       this.booking.splice(this.bookings.indexOf(bookRented));
-       return true;
-     } else{
-       return false;
-     }
-   })
- }
 }
 class UIMembers {
   static addMember(member) {
     const memberRow = document.createElement('tr');
     memberRow.id = 'member-tr';
-    member.id = create_UUID();
+    //member.id = create_UUID();
     memberRow.innerHTML = `
-    <td>${member.id.toUpperCase()}</td>
+    <td><span class="far fa-copy hover-grow tooltip tooltip--bottom-right" data-tooltip="Copy ID"></span>${member.id.toUpperCase()}</td>
     <td>${member.name}</td>
     <td>${member.phone}</td>
     <td class="member-address"><i
@@ -121,15 +101,20 @@ memberForm_EL.addEventListener('submit', function (e) {
       memberAddress_EL.value = '';
     }
 
-  e.preventDefault;
-});
-// Delete Member
-memberTbody_EL.addEventListener('click', function (e) {
-  removeRow(e, 'member-tr');
+  e.preventDefault();
 });
 // Open Edit-Modal
 memberTbody_EL.addEventListener('click', function (e) {
-  editRow(e, 'member-tr');
+  if (e.target.classList.contains('fa-edit')) {
+    console.log(e.target.parentElement.parentElement.parentElement)
+    editRow(e, 'member-tr');
+  }
+  if (e.target.classList.contains('fa-trash')) {
+    removeRow(e, 'member-tr');
+  }
+  if(e.target.classList.contains('fa-copy')){
+    copyToClipboard(e);
+  }
 });
 // Edit Member
 modalEditFooter_EL.addEventListener('click', function(e){

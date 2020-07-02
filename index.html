@@ -33,8 +33,8 @@
   </head>
   <body>
     <div class="content *-tablet w-100">
-      <div class="row">
-        <div class="col-12">
+      <div class="row main-col">
+        <div class="col-12 main-col">
           <div class="card">
             <div class="tab-container tabs-classic tabs-center tabs-fill">
               <ul class="tabs">
@@ -98,7 +98,7 @@
                   <table class="table borderless u-text-left fixed-head">
                     <div class="divider"></div>
                     <h2 class="u-text-center font-normal">Books</h2>
-                    <!--search bar-->
+                    <!-- search bar-->
                     <input
                       class="input-small"
                       type="search"
@@ -142,7 +142,7 @@
                   </table>
                 </div>
                 <!--END BOOK SECTION  -  -  -  -  -  -  -  -  -  -  -  -  -  -->
-                <div class="active" id="booking-container" data-tab-content>
+                <div class="" id="booking-container" data-tab-content>
                    <!--FormBookings-------------------------------------------->
                    <form autocomplete="off" id="booking-form">
                      <div class="row">
@@ -183,7 +183,7 @@
                   <table class="table borderless u-text-left fixed-head">
                     <div class="divider"></div>
                     <h2 class="u-text-center font-normal">Returns</h2>
-                    <!--search bar-->
+                    <!--booking search bar-->
                     <input
                       class="input-small"
                       type="search"
@@ -201,28 +201,24 @@
                       </tr>
                     </thead>
                     <!--table body-->
-                    <tbody id="booking-tbody">
-                      <tr id="booking-tr">
-                        <!--member-->
-                        <td id="id-td"><div class="tag tag-info hover-grow">ID</div></td>
-                        <td id="name-td">Rafael Castillo</td>
-                        <!--book-->
-                        <td id="booking-isbm-th"><div class="tag tag-info hover-grow">ISBM</div></td>
-                        <td id="booking-tittle-td">How to think like a programmer</td>
-                        <!--Return State-->
-                        <td id="return-state-td">
-                          <div class="tag tag--success hover-grow">On Time</div>
-                        </td>
-                        <!--Return Button-->
-                        <td id="return-btn-td">
-                          <button class="btn btn-return u-no-margin btn-small">Return</button>
-                        </td>
-                      </tr>
+                    <tbody id="booking-tbody">    
+                       <!--<tr id="booking-tr">-
+                          <td id="id-td"><div class="tag tooltip tooltip--bottom-right tag-info hover-grow" data-tooltip="Tooltip Top Left">ID</div></td>
+                          <td id="name-td">Rafael Castillo</td>
+                          <td id="booking-isbm-th"><div class="tag tag-info hover-grow tooltip tooltip--bottom-right" data-tooltip="Tooltip Top Left">ISBM</div></td>
+                          <td id="booking-tittle-td">How to think like a programmer</td>
+                          <td id="return-state-td">
+                            <div class="tag tag--success hover-grow">On Time</div>
+                          </td>
+                          <td id="return-btn-td">
+                            <button class="btn btn-return u-no-margin btn-small">Return</button>
+                          </td>
+                        </tr>--> 
                     </tbody>
                   </table>
                 </div>
                 <!--END BOOKING SECTION  -  -  -  -  -  -  -  -  -  -  -  -  -->
-                <div class="" id="members-container" data-tab-content>
+                <div class="active" id="members-container" data-tab-content>
                   <!--FormMembers---------------------------------------------->
                   <form autocomplete="off" id="members-form">
                     <div class="row">
@@ -399,5 +395,6 @@
     <script src="books.js"></script>
     <script src="members.js"></script>
     <script src="util.js" defer></script>
+    <script src="bookings.js" defer></script>
   </body>
 </html>

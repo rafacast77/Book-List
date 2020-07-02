@@ -1,5 +1,4 @@
 /** @format */
-
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // GENERAL CONTENT
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
@@ -12,8 +11,8 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .content {
-
+  .card {
+    transform: scale(0.9);
   }
 }
 @media screen and (max-width: 768px) {
@@ -93,7 +92,8 @@ td {
 // BUTTONS
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
 .fa-edit,
-.fa-trash {
+.fa-trash,
+.fa-copy {
   cursor: pointer;
 }
 .fa-edit {
@@ -111,13 +111,13 @@ td {
 }
 .btn-return {
   font-weight: bold;
-  color: rgba(36, 35, 35, 0.747) !important;
+  color: rgba(58, 58, 58, 0.719) !important;
   background-color: rgba(230, 227, 227, 0.733) !important;
   transition-duration: 0.6s !important;
 }
 .btn-return:hover {
   color: white!important;
-  background-color: rgba(41, 39, 39, 0.842) !important;
+  background-color: rgba(71, 71, 71, 0.842) !important;
 }
 .tag-info {
   background-color: #2972faaf !important;
@@ -130,11 +130,17 @@ td {
 .btn-primary {
   font-size: 14px !important;
 }
+.fa-copy:hover{
+  color: #2972faaf !important;
+}
+.fa-copy{
+  padding-right: 0.2rem !important;
+}
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // FIXES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
-/*Fixes alignment when scroll bar appears and moves the tbody
-away from the thead in all tables*/
+/*Fixes alignment when vertical scroll bar appears and moves the tbody
+away from the fixed thead in all tables*/
 tbody {
   overflow: -moz-scrollbars-vertical !important;
   overflow-y: scroll !important;
@@ -194,3 +200,7 @@ td {
 #id-td {
   vertical-align: start;
 }
+/* Removes x from search bar*/
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
