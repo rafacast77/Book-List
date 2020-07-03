@@ -44,18 +44,20 @@ class UIBooking {
       <div class="tag tag--success hover-grow tooltip tooltip--bottom-left" data-tooltip="${returnDate}">On Time</div>
     </td>
     <td id="return-btn-td">
+      <a href="#top">
       <button class="btn btn-return u-no-margin btn-small">Return</button>
+      </a>
     </td>
     `;
     bookingTBody_EL.appendChild(bookingRow);
     toastAlert('Booking has been successful', 'success');
   }
   static removeBooking(memberID, bookISBN) {
-        let book = returnObjWithId(bookISBN, 'book'),
-          member = returnObjWithId(memberID, 'member');
-          book.booked = false;
-          member.bookingLimit--;
-          toastAlert('Book successfully returned', 'success');
+    let book = returnObjWithId(bookISBN, 'book'),
+      member = returnObjWithId(memberID, 'member');
+    book.booked = false;
+    member.bookingLimit--;
+    toastAlert('Book successfully returned', 'success');
   }
   static bookingCheckout(book, member) {
     if (member !== false) {
@@ -105,17 +107,19 @@ bookingForm_EL.addEventListener('submit', function (e) {
 
 bookingTBody_EL.addEventListener('click', function (e) {
   if (e.target.classList.contains('btn-return')) {
+    console.log(e.target.parentElement.parentElement.parentElement.children[2]
+      .firstChild.dataset.tooltip)
     const memberID =
-    e.target.parentElement.parentElement.children[0].firstChild.dataset
-    .tooltip,
-    bookToReturn =
-    e.target.parentElement.parentElement.children[2].firstChild.dataset
-    .tooltip;
+        e.target.parentElement.parentElement.parentElement.children[0]
+          .firstChild.dataset.tooltip,
+      bookToReturn =
+        e.target.parentElement.parentElement.parentElement.children[2]
+          .firstChild.dataset.tooltip;
     UIBooking.removeBooking(memberID, bookToReturn);
-    e.target.parentElement.parentElement.remove();
+    e.target.parentElement.parentElement.parentElement.remove();
   }
 });
 // Search Booking
-bookingSearch_EL.addEventListener('keyup', function(e){
+bookingSearch_EL.addEventListener('keyup', function (e) {
   search(e, '#booking-tr');
 });
