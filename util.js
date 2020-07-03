@@ -182,8 +182,8 @@ function addDummyInfo() {
     )),
     (member3 = new Member(
       'LIB20-F32-9C2',
-      '	Natasha Alexander',
-      '078-7360-4056',
+      'Niccolò Costanzo',
+      '+39 340 718 4153',
       'LONDON  90 Guild Street EC4V 1XP'
     )),
     (member4 = new Member(
