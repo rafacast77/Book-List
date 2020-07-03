@@ -1,4 +1,5 @@
 /** @format */
+// Adds Dummy Information for testing
 
 const card = document.querySelector('.card'),
   tab_EL = document.querySelector('.tab-container'),
@@ -12,7 +13,13 @@ const card = document.querySelector('.card'),
   modalEditInput3_EL = document.querySelector('#modal-edit-input3'),
   modalEditForm_EL = document.querySelector('#modal-edit-form');
 
+let library = [],
+  members = [];
+
+
+
 document.addEventListener('DOMContentLoaded', addDummyInfo());
+
 // Tab navigation
 tabs_ELs.forEach((tab) => {
   tab.addEventListener('click', function (e) {
@@ -71,40 +78,58 @@ function create_UUID() {
     dt = Math.floor(dt / 16);
     return (c == 'x' ? r : (r & 0x3) | 0x8).toString(16);
   });
-
+  uuid.toUpperCase();
   return uuid;
 }
-
+// Returns a member or book based on ID
+function returnObjWithId(objectID, objType) {
+  if (objType === 'book') {
+    for (let book of library) {
+      if (objectID === book.isbn) {
+        return book;
+      }
+    }
+  }
+  if (objType === 'member') {
+    for (let member of members) {
+      if (objectID === member.id) {
+        return member;
+      }
+    }
+  }
+  return false;
+}
 // Modal-Remove
-function removeRow(e, bodyTr) {
-  let itemName = e.target.parentElement.parentElement.parentElement.children[1].textContent;
+function removeModal(e, itemType) {
+  let itemName =
+    e.target.parentElement.parentElement.parentElement.children[1].textContent;
   delItemName_EL.textContent = `${itemName} ?`;
   deleteWarning_EL.addEventListener('click', function deleteTrue(e2) {
     if (e2.target.classList.contains('delete')) {
-      let id = e.target.parentElement.parentElement.parentElement.children[0].textContent;
+      let id =
+        e.target.parentElement.parentElement.parentElement.children[0]
+          .textContent;
       // We only want IDs # to find the row to be eliminated
-      if (bodyTr === 'book-tr') {
-        book = new Book(null, null, id);
-        UIBooks.removeBook(book);
-      } else if (bodyTr === 'member-tr') {
-        const member = new Member(id, null, null, null);
-        UIMembers.removeMember(member);
-      } else {
-        //TODO
+      if (itemType === 'book') {
+        UIBooks.removeBook(id);
       }
+      if (itemType === 'member') {
+        UIMembers.removeMember(id);
+      }
+      e.target.parentElement.parentElement.parentElement.remove();
       deleteWarning_EL.removeEventListener('click', deleteTrue);
     }
   });
 }
 // Modal-Edit
-function editRow(e, bodyTr) {
+function editModal(e, itemType) {
   modalEditInput3_EL.value =
     e.target.parentElement.parentElement.parentElement.children[0].innerText;
   modalEditInput1_EL.value =
     e.target.parentElement.parentElement.parentElement.children[1].innerText;
   modalEditInput2_EL.value =
     e.target.parentElement.parentElement.parentElement.children[2].innerText;
-  if (bodyTr === 'member-tr') {
+  if (itemType === 'member') {
     modalLabel1_EL.textContent = 'Name:';
     modalLabel2_EL.textContent = 'Phone:';
     modalLabel3_EL.textContent = 'Member ID:';
@@ -117,10 +142,10 @@ function editRow(e, bodyTr) {
       </div>
       `
     );
-  } else if (bodyTr === 'book-tr') {
+  } else if (itemType === 'book') {
     modalLabel1_EL.textContent = 'Book tittle:';
     modalLabel2_EL.textContent = 'Book Author:';
-    modalLabel3_EL.textContent = 'Book ISBM:';
+    modalLabel3_EL.textContent = 'Book ISBN:';
   }
 }
 // Creates a return time this should be part of bookinga
@@ -143,7 +168,6 @@ function copyToClipboard(e) {
   document.body.removeChild(copyText_EL);
 }
 
-// Adds Dummy Information for testing
 function addDummyInfo() {
   (member1 = new Member(
     'LIB20-829-955',
@@ -152,37 +176,37 @@ function addDummyInfo() {
     'SALFORD  62 Wade Lane M5 7BH'
   )),
     (member2 = new Member(
-      'LIB20-f97-47e',
+      'LIB20-F97-47E',
       'Rafael Castillo',
       '075-7201-8284',
       'Aberdeen  19 Morningside Grove AB10 7DJ'
     )),
     (member3 = new Member(
-      'LIB20-f32-9c2',
+      'LIB20-F32-9C2',
       '	Natasha Alexander',
       '078-7360-4056',
       'LONDON  90 Guild Street EC4V 1XP'
     )),
     (member4 = new Member(
-      'LIB20-992-7cc',
+      'LIB20-992-7CC',
       'Lily Z Bryant',
       '078-4486-4763',
       'GLASGOW  72 Nith Street G2 5UY'
     )),
     (member5 = new Member(
-      'LIB20-0ac-54c',
+      'LIB20-0AC-54C',
       '	Taylor Dennis',
       '070-7356-6001',
       'EDINBURGH  92 Park Row EH8 7JR'
     )),
     (member6 = new Member(
-      'LIB20-48a-cb3',
+      'LIB20-48A-CB3',
       'Francesco Gruosso',
       '077-7198-1330',
       'MANCHESTER  22 Cunnery Rd M60 3WG'
     )),
     (member7 = new Member(
-      'LIB20-5cb-f7d',
+      'LIB20-5CB-f7D',
       'Elizabeth Hale',
       '079-8401-3433',
       'LIVERPOOL 47 Overton Circle L3 3ZB'
@@ -223,7 +247,7 @@ function addDummyInfo() {
     book10 = new Book('The Alchemist', 'Paulo Coelho', '978-0-7225-3293-5'),
     book11 = new Book('Brave New World', 'Aldous Huxley', '978-0-099-51847-1');
 
-  (library = [
+  library = [
     book1,
     book2,
     book3,
@@ -235,12 +259,62 @@ function addDummyInfo() {
     book9,
     book10,
     book11,
-  ]),
-    (members = [member1, member2, member3, member4, member5, member6, member7]);
+  ];
+  function addMemberStart(member) {
+    const memberRow = document.createElement('tr');
+    memberRow.id = 'member-tr';
+    memberRow.innerHTML = `
+    <td><span class="far fa-copy hover-grow tooltip tooltip--bottom-right" data-tooltip="Copy ID"></span>${member.id.toUpperCase()}</td>
+    <td>${member.name}</td>
+    <td>${member.phone}</td>
+    <td class="member-address"><i
+      class="required fas fa-info-circle fa-lg hover-grow tooltip tooltip--bottom-left"
+      data-tooltip="${member.address}"
+    ></i>
+    </td>
+    <td class="member-options-td">
+      <div id="options-icons">
+        <a
+          href="#modal-edit"
+          class="fas fa-edit fa-lg hover-grow"
+        ></a>
+        <a
+          href="#modal-warning"
+          class="fas fa-trash fa-lg hover-grow"
+        ></a>
+      </div>
+    </td>
+    `;
+    memberTbody_EL.appendChild(memberRow);
+  }
+
+  function addBookStart(book) {
+    const newBook_EL = document.createElement('tr');
+    newBook_EL.id = 'book-tr';
+    newBook_EL.innerHTML = `
+    <td><span class="far fa-copy hover-grow tooltip tooltip--bottom-right" data-tooltip="Copy ISBN"></span>${book.isbn}</td>
+    <td>${book.title}</td>
+    <td>${book.author}</td>
+    <td class="options-td">
+      <div id="options-icons">
+        <a
+          href="#modal-edit"
+          class="fas fa-edit fa-lg hover-grow"
+        ></a>
+        <a
+          href="#modal-warning"
+          class="fas fa-trash fa-lg hover-grow"
+        ></a>
+      </div>
+    </td>
+    `;
+    bookTableBody_EL.appendChild(newBook_EL);
+  }
+  members = [member1, member2, member3, member4, member5, member6, member7];
   library.forEach((book) => {
-    UIBooks.addBook(book);
+    addBookStart(book);
   });
   members.forEach((member) => {
-    UIMembers.addMember(member);
+    addMemberStart(member);
   });
 }

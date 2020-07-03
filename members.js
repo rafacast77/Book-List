@@ -28,7 +28,7 @@ class UIMembers {
   static addMember(member) {
     const memberRow = document.createElement('tr');
     memberRow.id = 'member-tr';
-    //member.id = create_UUID();
+    member.id = create_UUID();
     memberRow.innerHTML = `
     <td><span class="far fa-copy hover-grow tooltip tooltip--bottom-right" data-tooltip="Copy ID"></span>${member.id.toUpperCase()}</td>
     <td>${member.name}</td>
@@ -52,10 +52,11 @@ class UIMembers {
     </td>
     `;
     memberTbody_EL.appendChild(memberRow);
-    //toastAlert('New member successfully added', 'success')
+    members.push(members);
+    toastAlert('New member has been added', 'success')
   }
   static editMember(member) {
-    // Iterates through all rows if ISBM match it edits that row
+    // Iterates through all rows if isbn match it edits that row
     document.querySelectorAll('#member-tr').forEach(function (tr) {
       let targetID = tr.children[0].innerText;
       if (member.id === targetID) {
@@ -66,15 +67,13 @@ class UIMembers {
       }
     });
   }
-  static removeMember(member) {
-    // Iterates through all rows if Member ID match it deletes that row
-    document.querySelectorAll('#member-tr').forEach(function (tr) {
-      let targetID = tr.children[0].innerText;
-      if (member.id === targetID) {
-        tr.remove();
-        toastAlert('Member successfully removed', 'success');
+  static removeMember(memberIDToRemove) {
+    for(let member of members) {
+      if (member.id === memberIDToRemove) {
+        members.splice(members.indexOf(member));
+        toastAlert('Member has been removed', 'success');
       }
-    });
+    }
   }
   static requiredMissing(member) {
     if (member.name === '' || member.phone === '' || member.address === '') {
@@ -103,14 +102,13 @@ memberForm_EL.addEventListener('submit', function (e) {
 
   e.preventDefault();
 });
-// Open Edit-Modal
+// 
 memberTbody_EL.addEventListener('click', function (e) {
   if (e.target.classList.contains('fa-edit')) {
-    console.log(e.target.parentElement.parentElement.parentElement)
-    editRow(e, 'member-tr');
+    editModal(e, 'member');
   }
   if (e.target.classList.contains('fa-trash')) {
-    removeRow(e, 'member-tr');
+    removeModal(e, 'member');
   }
   if(e.target.classList.contains('fa-copy')){
     copyToClipboard(e);

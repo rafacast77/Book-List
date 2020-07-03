@@ -54,10 +54,10 @@ tr:hover {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
 #book-title,
 #book-author,
-#book-isbm,
+#book-isbn,
 #book-edit-title,
 #book-edit-author,
-#book-edit-isbm,
+#book-edit-isbn,
 #search,
 .member-address {
   font-size: 1rem;
@@ -116,7 +116,7 @@ td {
   transition-duration: 0.6s !important;
 }
 .btn-return:hover {
-  color: white!important;
+  color: white !important;
   background-color: rgba(71, 71, 71, 0.842) !important;
 }
 .tag-info {
@@ -130,10 +130,10 @@ td {
 .btn-primary {
   font-size: 14px !important;
 }
-.fa-copy:hover{
+.fa-copy:hover {
   color: #2972faaf !important;
 }
-.fa-copy{
+.fa-copy {
   padding-right: 0.2rem !important;
 }
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -173,7 +173,7 @@ td {
 #booking-book-th {
   padding-right: 7.3rem !important;
 }
-#booking-isbm-th {
+#booking-isbn-th {
   width: 1% !important;
 }
 #return-state-th {
@@ -196,11 +196,13 @@ td {
 }
 #return-btn-td,
 #return-state-td,
-#booking-isbm-th,
+#booking-isbn-th,
 #id-td {
   vertical-align: start;
 }
 /* Removes x from search bar*/
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration { display: none; }
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
+  display: none;
+}

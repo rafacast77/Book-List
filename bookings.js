@@ -7,7 +7,7 @@
 // Books-Tab UI element variable declaration, identification, initialization
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 const bookingMID_EL = document.querySelector('#booking-member-id'),
-  bookingISBM_EL = document.querySelector('#booking-isbm'),
+  bookingisbn_EL = document.querySelector('#booking-isbn'),
   bookingForm_EL = document.querySelector('#booking-form'),
   bookingTBody_EL = document.querySelector('#booking-tbody'),
   bookingSearch_EL = document.querySelector('#booking-search'),
@@ -25,20 +25,19 @@ class Booking {
 }
 class UIBooking {
   static addBooking(booking) {
-    // Creates return date text for tooltip
-    let returnDate = booking.bookingTimeLeft;
-    returnDate = new Date(returnDate);
-    returnDate = returnDate.toString();
-    returnDate = returnDate.split(' ');
-    returnDate = returnDate.splice(0, 4);
-    // Adds Tr to Tbody
-    const bookingRow = document.createElement('tr');
+    // Creates return date text for UI
+    const returnDate = new Date(setReturnTime())
+        .toString()
+        .split(' ')
+        .splice(0, 4),
+      // Adds Tr to Tbody
+      bookingRow = document.createElement('tr');
     bookingRow.id = 'booking-tr';
     bookingRow.innerHTML = `
     <td id="id-td"><div class="tag tooltip tooltip--bottom-right tag-info hover-grow" data-tooltip="${booking.member.id}">ID</div>
     </td>
     <td id="name-td">${booking.member.name}</td>
-    <td id="booking-isbm-th"><div class="tag tag-info hover-grow tooltip tooltip--bottom-right" data-tooltip="${booking.book.isbm}">ISBM</div>
+    <td id="booking-isbn-th"><div class="tag tag-info hover-grow tooltip tooltip--bottom-right" data-tooltip="${booking.book.isbn}">ISBN</div>
     </td>
     <td id="booking-tittle-td">${booking.book.title}</td>
     <td id="return-state-td">
@@ -49,56 +48,34 @@ class UIBooking {
     </td>
     `;
     bookingTBody_EL.appendChild(bookingRow);
+    toastAlert('Booking has been successful', 'success');
   }
   static removeBooking(memberID, bookISBN) {
-    // Iterates through all rows if Member ID match it deletes that row
-    document.querySelectorAll('#booking-tr').forEach(function (tr) {
-      let targetID = tr.children[0].firstChild.dataset.tooltip,
-        targetisbm = tr.children[2].firstChild.dataset.tooltip;
-      if (memberID === targetID && bookISBN === targetisbm) {
-        tr.remove();
-        if (!UIBooking.checkBookDatabase(bookISBN, library, 'return')) {
-          toastAlert('Book does not exist', 'error');
-        }
-      }
-    });
-  }
-  // Checks if member exists in storage and if it has reach it's booking limits
-  static checkMemberForBooking(memberID, membersList) {
-    for (let member of membersList) {
-      member.id = member.id.toUpperCase();
-      if (member.id === memberID) {
-        member.bookingLimit++;
-        if (member.bookingLimit <= 3) {
-          return member;
-        } else {
-          toastAlert('This member has reached booking limit', 'error');
+        let book = returnObjWithId(bookISBN, 'book'),
+          member = returnObjWithId(memberID, 'member');
+          book.booked = false;
           member.bookingLimit--;
-          break;
-        }
-      }
-    }
-    return false;
+          toastAlert('Book successfully returned', 'success');
   }
-  //Checks if book exists in storage and if it has reach it's booking limits
-  static checkBookDatabase(bookISBM, booksList, forBooking) {
-    for (let book of booksList) {
-      if (bookISBM === book.isbm) {
-        if (forBooking === 'booking') {
-          if (!book.booked) {
+  static bookingCheckout(book, member) {
+    if (member !== false) {
+      if (member.bookingLimit < 3) {
+        if (book !== false) {
+          if (book.booked !== true) {
             book.booked = true;
-            console.log(book);
-            return book;
+            member.bookingLimit++;
+            return true;
           } else {
             toastAlert('Book is already rented', 'error');
           }
         } else {
-          book.booked = false;
-           
-          console.log(book);
-          return book;
+          toastAlert('Book not found', 'error');
         }
+      } else {
+        toastAlert('This member has reached booking limit', 'error');
       }
+    } else {
+      toastAlert('Member not found', 'error');
     }
     return false;
   }
@@ -108,37 +85,37 @@ class UIBooking {
 // Book-Tab Event Listeners
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bookingForm_EL.addEventListener('submit', function (e) {
-  let bookingMID = bookingMID_EL.value,
-    bookingISBM = bookingISBM_EL.value;
+  if (bookingisbn_EL.value !== '' && bookingMID_EL.value !== '') {
+    let book = returnObjWithId(bookingisbn_EL.value, 'book'),
+      member = returnObjWithId(bookingMID_EL.value, 'member');
 
-  const bookingMember = UIBooking.checkMemberForBooking(bookingMID, members);
-  if (bookingMember !== false) {
-    const bookingBook = UIBooking.checkBookDatabase(bookingISBM, library, 'booking');
-    if (bookingBook !== false) {
-      let returnBookDate = setReturnTime();
-      const booking = new Booking(bookingMember, bookingBook, returnBookDate);
-
+    if (UIBooking.bookingCheckout(book, member)) {
+      let returnBookDate = setReturnTime(),
+        booking = new Booking(member, book, returnBookDate);
       UIBooking.addBooking(booking);
-    } else {
-      toastAlert('Book not found', 'error');
+      bookingMID_EL.value = '';
+      bookingisbn_EL.value = '';
     }
   } else {
-    toastAlert('Member not found', 'error');
+    toastAlert('All field inputs must be filled', 'error');
   }
 
-  bookingMID_EL.value = '';
-  bookingISBM_EL.value = '';
   e.preventDefault();
 });
 
 bookingTBody_EL.addEventListener('click', function (e) {
   if (e.target.classList.contains('btn-return')) {
     const memberID =
-        e.target.parentElement.parentElement.children[0].firstChild.dataset
-          .tooltip,
-      bookToReturn =
-        e.target.parentElement.parentElement.children[2].firstChild.dataset
-          .tooltip;
+    e.target.parentElement.parentElement.children[0].firstChild.dataset
+    .tooltip,
+    bookToReturn =
+    e.target.parentElement.parentElement.children[2].firstChild.dataset
+    .tooltip;
     UIBooking.removeBooking(memberID, bookToReturn);
+    e.target.parentElement.parentElement.remove();
   }
+});
+// Search Booking
+bookingSearch_EL.addEventListener('keyup', function(e){
+  search(e, '#booking-tr');
 });

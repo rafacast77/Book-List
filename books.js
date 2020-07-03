@@ -16,10 +16,10 @@ const bookContainer_EL = document.querySelector('.tab-content'),
 // Book-Tab Objects and Functions
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 class Book {
-  constructor(title, author, isbm) {
+  constructor(title, author, isbn) {
     this.title = title;
     this.author = author;
-    this.isbm = isbm;
+    this.isbn = isbn;
     this.booked = false;
   }
 }
@@ -28,7 +28,7 @@ class UIBooks {
     const newBook_EL = document.createElement('tr');
     newBook_EL.id = 'book-tr';
     newBook_EL.innerHTML = `
-    <td><span class="far fa-copy hover-grow tooltip tooltip--bottom-right" data-tooltip="Copy ISBN"></span>${book.isbm}</td>
+    <td><span class="far fa-copy hover-grow tooltip tooltip--bottom-right" data-tooltip="Copy ISBN"></span>${book.isbn}</td>
     <td>${book.title}</td>
     <td>${book.author}</td>
     <td class="options-td">
@@ -44,35 +44,23 @@ class UIBooks {
       </div>
     </td>
     `;
+    library.push(book);
     bookTableBody_EL.appendChild(newBook_EL);
-    //toastAlert('A new Book has been added', 'success');
+    toastAlert('A new Book has been added', 'success');
   }
-  static requiredMissing(book) {
-    if (book.title === '' || book.isbm === '') {
-      return true;
-    }
-  }
-  static invalidISBM(book) {
-    if (book.isbm.length < 10 || book.isbm.length > 13) {
-      return true;
-    }
-  }
-  static removeBook(book) {
-    // Iterates through all rows if ISBM match it edits that row
-    document.querySelectorAll('#book-tr').forEach(function (tr) {
-      let targetISBM = tr.children[0].innerText;
-      console.log(targetISBM);
-      if (book.isbm === targetISBM) {
-        tr.remove();
+  static removeBook(bookIsbn) {
+    for (let book of library) {
+      if (book.isbn === bookIsbn) {
+        library.splice(library.indexOf(book));
         toastAlert('Book has been removed', 'success');
       }
-    });
+    }
   }
   static editBook(book) {
-    // Iterates through all rows if ISBM match it edits that row
+    // Iterates through all rows if isbn match it edits that row
     document.querySelectorAll('#book-tr').forEach(function (tr) {
-      let targetISBM = tr.children[0].innerText;
-      if (book.isbm === targetISBM) {
+      let targetisbn = tr.children[0].innerText;
+      if (book.isbn === targetisbn) {
         tr.children[1].textContent = book.title;
         tr.children[2].textContent = book.author;
         toastAlert('Book has been successfully edited', 'success');
@@ -88,30 +76,30 @@ class UIBooks {
 form_EL.addEventListener('submit', function (e) {
   const title = document.querySelector('#book-title').value,
     author = document.querySelector('#book-author').value,
-    isbm = document.querySelector('#book-isbm').value,
-    book = new Book(title, author, isbm);
-  if (UIBooks.requiredMissing(book)) {
-    toastAlert('Missing title information or ISBM', 'error');
-  } else if (UIBooks.invalidISBM(book)) {
-    toastAlert('ISBM must be between 10 to 13 characters', 'error');
+    isbn = document.querySelector('#book-isbn').value,
+    book = new Book(title, author, isbn);
+  if (book.title === '' || book.isbn === '') {
+    toastAlert('Inputs with an asterisk must be filled', 'error');
+  } else if (book.isbn.length < 10 || book.isbn.length > 13) {
+    toastAlert('ISBN must be between 10 to 13 characters', 'error');
   } else {
     UIBooks.addBook(book);
 
     document.querySelector('#book-title').value = '';
     document.querySelector('#book-author').value = '';
-    document.querySelector('#book-isbm').value = '';
+    document.querySelector('#book-isbn').value = '';
   }
   e.preventDefault();
 });
 // Open Edit-Modal
 bookTableBody_EL.addEventListener('click', function (e) {
   if (e.target.classList.contains('fa-edit')) {
-    editRow(e, 'book-tr');
+    editModal(e, 'book');
   }
   if (e.target.classList.contains('fa-trash')) {
-    removeRow(e, 'book-tr');
+    removeModal(e, 'book');
   }
-  if(e.target.classList.contains('fa-copy')){
+  if (e.target.classList.contains('fa-copy')) {
     copyToClipboard(e);
   }
 });
@@ -120,8 +108,8 @@ modalEditFooter_EL.addEventListener('click', function (e) {
   if (e.target.classList.contains('save')) {
     const title = modalEditInput1_EL.value,
       author = modalEditInput2_EL.value,
-      isbm = modalEditInput3_EL.value,
-      book = new Book(title, author, isbm);
+      isbn = modalEditInput3_EL.value,
+      book = new Book(title, author, isbn);
 
     UIBooks.editBook(book);
   }
@@ -145,4 +133,3 @@ search_EL.addEventListener('keyup', function (e) {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Book-Tab Event Listeners
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
