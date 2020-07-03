@@ -52,7 +52,9 @@ class UIMembers {
     </td>
     `;
     memberTbody_EL.appendChild(memberRow);
-    members.push(members);
+    members.push(member);
+    console.log(members)
+
     toastAlert('New member has been added', 'success')
   }
   static editMember(member) {
