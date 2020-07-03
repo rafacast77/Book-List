@@ -168,30 +168,6 @@ function copyToClipboard(e) {
 }
 
 function addDummyInfo() {
-  const welcomeModal = document.createElement('div');
-  welcomeModal.className = 'modal'
-  welcomeModal.innerHTML= `
-  <div class="modal-content" role="document">
-      <div class="modal-header">
-          <div class="modal-title">Welcome to Librarian</div>
-      </div>
-      <div class="modal-body">
-          <p> If you would like to generate examples to play around with the App press \"Yes\".</p>
-          </br>
-          <p>PD: The books in the examples are great for a read</p>
-      </div>
-      <div class="modal-footer">
-      <a class="modal-footer-btn" href="#NON-EXISTANT-DIV">
-      <button class="btn-primary delete">Yes</button>
-    </a>
-    <a class="modal-footer-btn" href="#NON-EXISTANT-DIV">
-      <button class="btn-secondary cancel">No</button>
-    </a>
-      </div>
-  </div>
-  `;
-  body_EL.appendChild(welcomeModal);
-  welcomeModal.style.visibility = 'visible';
   (member1 = new Member(
     'LIB20-829-955',
     'Jamie Muir',
