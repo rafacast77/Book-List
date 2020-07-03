@@ -118,18 +118,3 @@ modalEditFooter_EL.addEventListener('click', function (e) {
 search_EL.addEventListener('keyup', function (e) {
   search(e, '#book-tr');
 });
-
-////////////////////////////////////////////////////////////////////////////////
-// MEMBERS TAB
-////////////////////////////////////////////////////////////////////////////////
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Books-Tab UI element variable declaration, identification, initialization
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Book-Tab Objects and Functions
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Book-Tab Event Listeners
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -53,9 +53,9 @@ class UIMembers {
     `;
     memberTbody_EL.appendChild(memberRow);
     members.push(member);
-    console.log(members)
+    console.log(members);
 
-    toastAlert('New member has been added', 'success')
+    toastAlert('New member has been added', 'success');
   }
   static editMember(member) {
     // Iterates through all rows if isbn match it edits that row
@@ -70,16 +70,11 @@ class UIMembers {
     });
   }
   static removeMember(memberIDToRemove) {
-    for(let member of members) {
+    for (let member of members) {
       if (member.id === memberIDToRemove) {
         members.splice(members.indexOf(member));
         toastAlert('Member has been removed', 'success');
       }
-    }
-  }
-  static requiredMissing(member) {
-    if (member.name === '' || member.phone === '' || member.address === '') {
-      return true;
     }
   }
 }
@@ -92,19 +87,19 @@ memberForm_EL.addEventListener('submit', function (e) {
     phone = memberPhone_EL.value,
     address = memberAddress_EL.value,
     member = new Member(null, name, phone, address);
-    if(UIMembers.requiredMissing(member)){
-      toastAlert('All member fields must be completed', 'error')
-    } else{
-      UIMembers.addMember(member);
-    
-      memberName_EL.value = '';
-      memberPhone_EL.value = '';
-      memberAddress_EL.value = '';
-    }
+  if (member.name === '' || member.phone === '' || member.address === '') {
+    toastAlert('All member fields must be completed', 'error');
+  } else {
+    UIMembers.addMember(member);
+
+    memberName_EL.value = '';
+    memberPhone_EL.value = '';
+    memberAddress_EL.value = '';
+  }
 
   e.preventDefault();
 });
-// 
+//
 memberTbody_EL.addEventListener('click', function (e) {
   if (e.target.classList.contains('fa-edit')) {
     editModal(e, 'member');
@@ -112,12 +107,12 @@ memberTbody_EL.addEventListener('click', function (e) {
   if (e.target.classList.contains('fa-trash')) {
     removeModal(e, 'member');
   }
-  if(e.target.classList.contains('fa-copy')){
+  if (e.target.classList.contains('fa-copy')) {
     copyToClipboard(e);
   }
 });
 // Edit Member
-modalEditFooter_EL.addEventListener('click', function(e){
+modalEditFooter_EL.addEventListener('click', function (e) {
   const modalEditInput4_EL = document.querySelector('#modal-edit-input4');
   if (e.target.classList.contains('save')) {
     const name = modalEditInput1_EL.value,
@@ -126,10 +121,10 @@ modalEditFooter_EL.addEventListener('click', function(e){
       address = modalEditInput4_EL.value,
       member = new Member(id, name, phone, address);
     UIMembers.editMember(member);
-  } 
+  }
   modalEditInput4_EL.parentElement.remove();
-})
+});
 // Search Member
-memberSearch_EL.addEventListener('keyup', function(e){
+memberSearch_EL.addEventListener('keyup', function (e) {
   search(e, '#member-tr');
 });
