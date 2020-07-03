@@ -150,7 +150,7 @@ function editModal(e, itemType) {
 // Creates a return time this should be part of bookinga
 function setReturnTime() {
   const dateReturned = new Date(),
-    bookingDayLimit = 1;
+    bookingDayLimit = 7;
   return dateReturned.setDate(dateReturned.getDate() + bookingDayLimit);
 }
 // copy to clipboard
