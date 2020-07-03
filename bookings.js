@@ -107,8 +107,6 @@ bookingForm_EL.addEventListener('submit', function (e) {
 
 bookingTBody_EL.addEventListener('click', function (e) {
   if (e.target.classList.contains('btn-return')) {
-    console.log(e.target.parentElement.parentElement.parentElement.children[2]
-      .firstChild.dataset.tooltip)
     const memberID =
         e.target.parentElement.parentElement.parentElement.children[0]
           .firstChild.dataset.tooltip,
