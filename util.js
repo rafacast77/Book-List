@@ -306,6 +306,11 @@ function addDummyInfo() {
       '079-8401-3433',
       'LIVERPOOL 47 Overton Circle L3 3ZB'
     );
+    member1.bookingLimit = '2';
+    member6.bookingLimit = '1';
+    book1.booked = true;
+    book7.booked = true;
+    book8.booked = true;
   membersDataset = [
     member1,
     member2,

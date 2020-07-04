@@ -34,7 +34,7 @@ class UIBooking {
     </td>
     <td id="booking-tittle-td">${book.title}</td>
     <td id="return-state-td">
-      <div class="tag ${returnTagColor} hover-grow tooltip tooltip--bottom-left" data-tooltip="${returnDate}">${returnLabel}/div>
+      <div class="tag tag--success hover-grow tooltip tooltip--bottom-left" data-tooltip="${returnDate}">On Time</div>
     </td>
     <td id="return-btn-td">
       <a href="#top">
