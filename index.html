@@ -1,350 +1,295 @@
 <!-- @format -->
-
 <!DOCTYPE html>
 <html lang="en" id="top">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Librarian</title>
-    <!--CSS-->
-    <link href="styles.css" rel="stylesheet" />
-    <!--Jquery-->
-    <script
-      src="https://code.jquery.com/jquery-2.2.4.min.js"
-      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-      crossorigin="anonymous"
-    ></script>
-    <!-- Font Awesome kit's-->
-    <script
-      src="https://kit.fontawesome.com/98b3fb4a9b.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Cirrus CDN-->
-    <link href="https://unpkg.com/cirrus-ui" type="text/css" rel="stylesheet" />
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div class="content *-tablet w-100">
-      <div class="row main-col">
-        <div class="col-12 main-col">
-          <div class="card">
-            <div class="tab-container tabs-classic tabs-center tabs-fill">
-              <ul class="tabs">
-                <li class="selected" data-tabs-target= "#booking-container"><a>Bookings</a></li>
-                <li data-tabs-target="#book-container"><a>Books</a></li>
-                <li data-tabs-target="#members-container"><a>Members</a></li>
-              </ul>
-            </div>
-            <!--END TABS CONTAINER  -  -  -  -  -  -  -  -  -  -  -  -  -  - -->
-              <div class="tab-content">
-                <div class="" id="book-container" data-tab-content>
-                  <!--FORM----------------------------------------------------->
-                  <form autocomplete="off" id="book-form">
-                    <div class="row">
-                      <div class="col-12 u-center">       
-                        <h4 class="font-thin title u-no-margin">Add a book</h4>
-                      </div>
-                    </div>
-                      <div class="row">
-                        <!--title-->
-                        <div class="col-6">
-                          <div class="form-section">
-                            <label class="font-normal"
-                              >Book title:<span class="required">*</span>
-                            </label>
-                            <input class="input-small" type="text" id="book-title" />
-                          </div>
-                        </div>
-                          <!--isbn-->
-                          <div class="col-6">
-                            <div class="form-section">
-                              <label class="font-normal"
-                                >Book ISBN:<span class="required">*</span>
-                              </label>
-                              <input class="input-small" type="number" id="book-isbn" />
-                            </div>           
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-12">
-                            <!--author-->
-                            <div class="form-section">
-                              <label class="font-normal">Book Author:</label>
-                              <input class="input-small" type="name" id="book-author" />
-                            </div>
-                          </div>                      
-                        </div>
-                        <div class="row">
-                          <div class="col-12" style="padding-top: 0.5rem;">
-                            <!--add book-->
-                            <input
-                              type="submit"
-                              href="#tab-ul"
-                              value="Add Book"
-                              class="btn-animated btn-small btn-primary u-fill-width"
-                            />
-                          </div>
-                        </div>
-                  </form>
-                  <!--Table Book---------------------------------------------->
-                  <table class="table borderless u-text-left fixed-head">
-                    <div class="divider"></div>
-                    <h2 class="u-text-center font-normal">Books</h2>
-                    <!-- search bar-->
-                    <input
-                      class="input-small"
-                      type="search"
-                      placeholder="search"
-                      id="search"
-                      autocomplete="off"
-                    />
-                    <!--table head-->
-                    <thead id="book-thead">
-                      <tr>
-                        <th>ISBN#</th>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th class="options-th"><i
-                          class="required fas fa-question-circle fa-lg hover-grow tooltip tooltip--top-left"
-                          style="color: rgba(39, 38, 38, 0.692) !important;"
-                          data-tooltip="Edit / Remove"
-                        ></i></th>
-                      </tr>
-                    </thead>
-                    <!--table body-->
-                    <tbody id="book-tbody"> 
-                    </tbody>
-                  </table>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Librarian</title>
+  <!--CSS-->
+  <link href="styles.css" rel="stylesheet" />
+  <!--Jquery-->
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <!-- Font Awesome kit's-->
+  <script src="https://kit.fontawesome.com/98b3fb4a9b.js" crossorigin="anonymous"></script>
+  <!-- Cirrus CDN-->
+  <link href="https://unpkg.com/cirrus-ui" type="text/css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
+</head>
+<body>
+  <div class="content *-tablet w-100">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <!--Start TABS container----------------------------------------->
+          <div class="tab-container tabs-classic tabs-center tabs-fill">
+            <ul class="tabs">
+              <li class="selected" data-tabs-target="#booking-container"><a>Bookings</a></li>
+              <li data-tabs-target="#book-container"><a>Books</a></li>
+              <li data-tabs-target="#members-container"><a>Members</a></li>
+            </ul>
+          </div>
+          <!--Start TAB-CONTENT container---------------------------------->
+          <div class="tab-content">
+            <!--Start BOOK container--------------------------------------->
+            <div class="" id="book-container" data-tab-content>
+              <!--BOOK FORM-->
+              <form autocomplete="off" id="book-form">
+                <div class="row">
+                  <div class="col-12 u-center">
+                    <h3 class="font-thin title u-no-margin">Add a book</h3>
+                  </div>
                 </div>
-                <!--END BOOK SECTION  -  -  -  -  -  -  -  -  -  -  -  -  -  -->
-                <div class="active" id="booking-container" data-tab-content>
-                   <!--FormBookings-------------------------------------------->
-                   <form autocomplete="off" id="booking-form">
-                     <div class="row">
-                      <div class="col-12 u-center">       
-                        <h4 class="font-thin title">Add Booking</h4>
-                      </div>
-                     </div>
-                     <div class="row">
-                      <!--memberID-->
-                      <div class="col-6">
-                        <div class="form-section">
-                          <label class="font-normal"
-                            >Member ID:<span class="required">*</span>
-                          </label>
-                              <input class="input-small" type="name" id="booking-member-id" />
-                        </div>
-                      </div>
-                      <!--isbn-->
-                      <div class="col-6 ">
+                <div class="row">
+                  <!--title-->
+                  <div class="col-6">
+                    <div class="form-section">
+                      <label class="font-normal">Book title:<span class="required">*</span>
+                      </label>
+                      <input class="input-small" type="text" id="book-title" />
+                    </div>
+                  </div>
+                  <!--isbn-->
+                  <div class="col-6">
+                    <div class="form-section">
+                      <label class="font-normal">Book ISBN:<span class="required">*</span>
+                      </label>
+                      <input class="input-small" type="number" id="book-isbn" />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <!--author-->
+                    <div class="form-section">
+                      <label class="font-normal">Book Author:</label>
+                      <input class="input-small" type="name" id="book-author" />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12" style="padding-top: 0.5rem;">
+                    <!--add book-->
+                    <input type="submit" href="#tab-ul" value="Add Book"
+                      class="btn-animated btn-small btn-primary u-fill-width" />
+                  </div>
+                </div>
+              </form>
+              <!--TABLE BOOK-->
+              <table class="table borderless u-text-left fixed-head">
+                <div class="divider"></div>
+                <h3 class="u-text-center font-normal">Books</h3>
+                <!--search bar-->
+                <input class="input-small" type="search" placeholder="search" id="search" autocomplete="off" />
+                <!--table head-->
+                <thead id="book-thead">
+                  <tr>
+                    <th>ISBN#</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th class="options-th"><i
+                        class="required fas fa-question-circle fa-lg hover-grow tooltip tooltip--top-left"
+                        style="color: rgba(39, 38, 38, 0.692) !important;" data-tooltip="Edit / Remove"></i></th>
+                  </tr>
+                </thead>
+                <!--table body-->
+                <tbody id="book-tbody">
+                </tbody>
+              </table>
+            </div>
+            <!-- Start BOOKING container----------------------------------->
+            <div class="active" id="booking-container" data-tab-content>
+              <!--BOOKING FORM-->
+              <form autocomplete="off" id="booking-form">
+                <div class="row">
+                  <div class="col-12 u-center">
+                    <h3 class="font-thin title">Add Booking</h3>
+                  </div>
+                </div>
+                <div class="row">
+                  <!--memberID-->
+                  <div class="col-6">
+                    <div class="form-section">
+                      <label class="font-normal">Member ID:<span class="required">*</span>
+                      </label>
+                      <input class="input-small" type="name" id="booking-member-id" />
+                    </div>
+                  </div>
+                  <!--isbn-->
+                  <div class="col-6 ">
                     <div class="form-section">
                       <label class="font-normal">ISBN:<span class="required">*</span></label>
-                      <input class="input-small" type="tel" id="booking-isbn"/>
+                      <input class="input-small" type="tel" id="booking-isbn" />
                     </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <!--add booking-->
-                          <div class="col-12" style="padding-top: 0.5rem;">
-                            <input
-                              type="submit"             
-                              value="Add Booking"
-                              class="btn-animated btn-small btn-primary u-fill-width"
-                            />
-                          </div>
-                        </div>   
-                  </form>
-                  <!--TableBookings------------------------------------------->
-                  <table class="table borderless u-text-left fixed-head">
-                    <div class="divider"></div>
-                    <h2 class="u-text-center font-normal">Returns</h2>
-                    <!--booking search bar-->
-                    <input
-                      class="input-small"
-                      type="search"
-                      placeholder="search"
-                      id="booking-search"
-                      autocomplete="off"
-                    />
-                    <!--table head-->
-                    <thead id="bookings-thead">
-                      <tr>       
-                        <th id="member-th">Member</th>         
-                        <th id="booking-book-th">Book</th>
-                        <th id="return-state-th">Return</th>
-                        <th id="return-th"></th>
-                      </tr>
-                    </thead>
-                    <!--table body-->
-                    <tbody id="booking-tbody">    
-                    </tbody>
-                  </table>
+                  </div>
                 </div>
-                <!--END BOOKING SECTION  -  -  -  -  -  -  -  -  -  -  -  -  -->
-                <div class="" id="members-container" data-tab-content>
-                  <!--FormMembers---------------------------------------------->
-                  <form autocomplete="off" id="members-form">
-                    <div class="row">
-                      <div class="col-12 u-center ">
-                        <h4 class="font-thin title">Add a Member</h4>
-                      </div>
+                <div class="row">
+                  <!--add booking-->
+                  <div class="col-12" style="padding-top: 0.5rem;">
+                    <input type="submit" value="Add Booking" class="btn-animated btn-small btn-primary u-fill-width" />
+                  </div>
+                </div>
+              </form>
+              <!--BOOKING TABLE-->
+              <table class="table borderless u-text-left fixed-head">
+                <div class="divider"></div>
+                <h3 class="u-text-center font-normal">Returns</h3>
+                <!--booking search bar-->
+                <input class="input-small" type="search" placeholder="search" id="booking-search" autocomplete="off" />
+                <!--table head-->
+                <thead id="bookings-thead">
+                  <tr>
+                    <th id="member-th">Member</th>
+                    <th id="booking-book-th">Book</th>
+                    <th id="return-state-th">Return</th>
+                    <th id="return-th"></th>
+                  </tr>
+                </thead>
+                <!--table body-->
+                <tbody id="booking-tbody">
+                </tbody>
+              </table>
+            </div>
+            <!--Start MEMBER container------------------------------------->
+            <div class="" id="members-container" data-tab-content>
+              <!--MEMBER FORM-->
+              <form autocomplete="off" id="members-form">
+                <div class="row">
+                  <div class="col-12 u-center ">
+                    <h3 class="font-thin title">Add a Member</h3>
+                  </div>
+                </div>
+                <div class="row">
+                  <!--name-->
+                  <div class="col-6">
+                    <div class="form-section">
+                      <label class="font-normal">Full Name:<span class="required">*</span>
+                      </label>
+                      <input class="input-small" type="name" id="member-name" />
                     </div>
-                    <div class="row">
-                      <!--name-->
-                      <div class="col-6">
-                        <div class="form-section">
-                          <label class="font-normal"
-                            >Full Name:<span class="required">*</span>
-                          </label>
-                              <input class="input-small" type="name" id="member-name" />
-                        </div>
-                      </div>
-                      <!--phone-->
-                      <div class="col-6 ">
+                  </div>
+                  <!--phone-->
+                  <div class="col-6 ">
                     <div class="form-section">
                       <label class="font-normal">Phone:<span class="required">*</span></label>
-                      <input class="input-small" type="tel" id="members-phone"/>
+                      <input class="input-small" type="tel" id="members-phone" />
                     </div>
-                      </div>
+                  </div>
+                </div>
+                <!--Address-->
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-section">
+                      <label class="font-normal">Address:<span class="required">*</span></label>
+                      <input class="input-small" type="text" id="members-address" />
                     </div>
-                    <!--Address-->
-                        <div class="row">
-                          <div class="col-12">
-                            <div class="form-section">
-                              <label class="font-normal">Address:<span class="required">*</span></label>
-                              <input class="input-small" type="text" id="members-address"/>
-                            </div>
-                          </div>
-                        </div>
-                        <!--add member-->
-                        <div class="row">
-                          <div class="col-12" style="padding-top: 0.5rem;">
-                            <input
-                              type="submit"             
-                              value="Add Member"
-                              class="btn-animated btn-small btn-primary u-fill-width"
-                            />
-                          </div>
-                        </div>   
-                  </form>
-                  <!--TableMember---------------------------------------------->
-                  <table class="table borderless u-text-left fixed-head">
-                    <div class="divider"></div>
-                    <h2 class="u-text-center font-normal">Members</h2>
-                    <!--search bar-->
-                    <input
-                      class="input-small"
-                      type="search"
-                      placeholder="search"
-                      id="member-search"
-                      autocomplete="off"
-                    />
-                    <!--table head-->
-                    <thead id="members-thead">
-                      <tr>
-                        <th>ID#</th>
-                        <th>Name</th>
-                        <th>Phone #</th>
-                        <th class="member-address-th"><i
-                          class="required fas fa-info-circle fa-lg hover-grow tooltip tooltip--top-left"
-                          style="color: rgba(39, 38, 38, 0.692) !important;"
-                          data-tooltip="Address"
-                        ></i></th>
-                        <th class="options-th"><i
-                          class="required fas fa-question-circle fa-lg hover-grow tooltip tooltip--top-left"
-                          style="color: rgba(39, 38, 38, 0.692) !important;"
-                          data-tooltip="Edit / Remove"
-                        ></i></th>
-                      </tr>
-                    </thead>
-                    <!--table body-->
-                    <tbody id="members-tbody">
-                    </tbody>
-                  </table>
+                  </div>
                 </div>
+                <!--add member-->
+                <div class="row">
+                  <div class="col-12" style="padding-top: 0.5rem;">
+                    <input type="submit" value="Add Member" class="btn-animated btn-small btn-primary u-fill-width" />
+                  </div>
                 </div>
-                <!--END MEMBERS SECTION  -  -  -  -  -  -  -  -  -  -  -  - --->
-              </div>
+              </form>
+              <!--MEMBER TABLE-->
+              <table class="table borderless u-text-left fixed-head">
+                <div class="divider"></div>
+                <h3 class="u-text-center font-normal">Members</h3>
+                <!--member search bar-->
+                <input class="input-small" type="search" placeholder="search" id="member-search" autocomplete="off" />
+                <!--member table head-->
+                <thead id="members-thead">
+                  <tr>
+                    <th>ID#</th>
+                    <th>Name</th>
+                    <th>Phone #</th>
+                    <th class="member-address-th"><i
+                        class="required fas fa-info-circle fa-lg hover-grow tooltip tooltip--top-left"
+                        style="color: rgba(39, 38, 38, 0.692) !important;" data-tooltip="Address"></i></th>
+                    <th class="options-th"><i
+                        class="required fas fa-question-circle fa-lg hover-grow tooltip tooltip--top-left"
+                        style="color: rgba(39, 38, 38, 0.692) !important;" data-tooltip="Edit / Remove"></i></th>
+                  </tr>
+                </thead>
+                <!-- member table body-->
+                <tbody id="members-tbody">
+                </tbody>
+              </table>
+            </div>
+            <!--End MEMBERS container-  -  -  -  -  -  -  -  -  -  -  - --->
           </div>
-          <!--End of CARD  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - -->
+          <!--End TAB-CONTENT-  -  -  -  -  -  -  -  -  -  -  -  -  -  - -->
         </div>
+        <!--End CARD  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -->
       </div>
     </div>
-    <!--MODALS-->
-    <div class="modal" id="modal-edit">
-      <div class="modal-content" role="document">
-        <div class="modal-header">
-          <h4 class="font-normal u-center title" id="modal-edit-title">Edit book</h4>
-        </div>
-        <div class="modal-body">
-          <form class="form" autocomplete="off" id="modal-edit-form">
-            <div class="form-section">
-              <label class="font-normal" id="modal-edit-label1"
-                ></label
-              >
-              <input class="input-small" type="text" id="modal-edit-input1" />
-            </div>
-            <div class="form-section">
-              <label class="font-normal" id="modal-edit-label2"></label>
-              <input class="input-small" type="name" id="modal-edit-input2" />
-            </div>
-            <div class="form-section">
-              <label class="font-normal" id="modal-edit-label3"
-                ></label><span
-                class="required fas fa-info-circle hover-grow tooltip tooltip--bottom"
-                data-tooltip="Can't be changed. if needed add a new"
-              ></span>
-              <input
-                disabled
-                class="input-small"
-                type="text"
-                id="modal-edit-input3"
-              />
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <a class="modal-footer-btn" href="#top">
-            <button class="btn-primary save">Save</button>
-          </a>
-          <a class="modal-footer-btn" href="#NON-EXISTANT-DIV">
-            <button class="btn-secondary cancel">Cancel</button>
-          </a>
-        </div>
+  </div>
+  <!--Start EDIT-MODAL-->
+  <div class="modal" id="modal-edit">
+    <div class="modal-content" role="document">
+      <div class="modal-header">
+        <h4 class="font-normal u-center title" id="modal-edit-title">Edit book</h4>
+      </div>
+      <!--body-->
+      <div class="modal-body">
+        <form class="form" autocomplete="off" id="modal-edit-form">
+          <div class="form-section">
+            <label class="font-normal" id="modal-edit-label1"></label>
+            <input class="input-small" type="text" id="modal-edit-input1" />
+          </div>
+          <div class="form-section">
+            <label class="font-normal" id="modal-edit-label2"></label>
+            <input class="input-small" type="name" id="modal-edit-input2" />
+          </div>
+          <div class="form-section">
+            <label class="font-normal" id="modal-edit-label3"></label><span
+              class="required fas fa-info-circle hover-grow tooltip tooltip--bottom"
+              data-tooltip="Can't be changed. if needed add a new"></span>
+            <input disabled class="input-small" type="text" id="modal-edit-input3" />
+          </div>
+        </form>
+      </div>
+      <!--footer-->
+      <div class="modal-footer">
+        <a class="modal-footer-btn" href="#top">
+          <button class="btn-primary save">Save</button>
+        </a>
+        <a class="modal-footer-btn" href="#NON-EXISTANT-DIV">
+          <button class="btn-secondary cancel">Cancel</button>
+        </a>
       </div>
     </div>
-    <div class="modal" id="modal-warning">
-      <div class="modal-content" role="document">
-        <div class="modal-header">
-          <h4 class="font-normal u-center title">Warning!</h4>
-        </div>
-        <div class="modal-body">
-          <p id="">Are you sure you want to delete </br>
-            <i id="delete-message"></i>
-          </p>
-        </div>
-        <div class="modal-footer">
-          <a class="modal-footer-btn" href="#top">
-            <button class="btn-primary delete">Delete</button>
-          </a>
-          <a class="modal-footer-btn" href="#NON-EXISTANT-DIV">
-            <button class="btn-secondary cancel">Cancel</button>
-          </a>
-        </div>
+  </div>
+  <!--Start DELETE-MODAL-->
+  <div class="modal" id="modal-warning">
+    <div class="modal-content" role="document">
+      <div class="modal-header">
+        <h4 class="font-normal u-center title">Warning!</h4>
+      </div>
+      <!--body-->
+      <div class="modal-body">
+        <p id="">Are you sure you want to delete </br>
+          <i id="delete-message"></i>
+        </p>
+      </div>
+      <!--footer-->
+      <div class="modal-footer">
+        <a class="modal-footer-btn" href="#top">
+          <button class="btn-primary delete">Delete</button>
+        </a>
+        <a class="modal-footer-btn" href="#NON-EXISTANT-DIV">
+          <button class="btn-secondary cancel">Cancel</button>
+        </a>
       </div>
     </div>
-    <!--JavaScript-->
-    <script src="books.js"></script>
-    <script src="members.js"></script>
-    <script src="util.js" defer></script>
-    <script src="bookings.js" defer></script>
-  </body>
+  </div>
+  <!--JavaScript-->
+  <script src="books.js"></script>
+  <script src="members.js"></script>
+  <script src="util.js"></script>
+  <script src="bookings.js"></script>
+</body>
 </html>
