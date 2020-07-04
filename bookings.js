@@ -65,7 +65,7 @@ class UIBooking {
   }
   static bookingCheckout(book, member) {
     if (member !== false) {
-      if (member.bookingLimit < 3) {
+      if (member.bookingLimit < 2) {
         if (book !== false) {
           if (book.booked !== true) {
             book.booked = true;
