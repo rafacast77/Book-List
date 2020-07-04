@@ -56,22 +56,22 @@
                     <div class="form-section">
                       <label class="font-normal">Book ISBN:<span class="required">*</span>
                       </label>
-                      <input class="input-small" type="number" id="book-isbn" />
+                      <input class="input-small" type="text" id="book-isbn" />
                     </div>
                   </div>
                 </div>
+                <!--author-->
                 <div class="row">
                   <div class="col-12">
-                    <!--author-->
                     <div class="form-section">
                       <label class="font-normal">Book Author:</label>
                       <input class="input-small" type="name" id="book-author" />
                     </div>
                   </div>
                 </div>
+                <!--add book-->
                 <div class="row">
                   <div class="col-12" style="padding-top: 0.5rem;">
-                    <!--add book-->
                     <input type="submit" href="#tab-ul" value="Add Book"
                       class="btn-animated btn-small btn-primary u-fill-width" />
                   </div>
@@ -82,7 +82,7 @@
                 <div class="divider"></div>
                 <h3 class="u-text-center font-normal">Books</h3>
                 <!--search bar-->
-                <input class="input-small" type="search" placeholder="search" id="search" autocomplete="off" />
+                <input class="input-small" type="search" placeholder="search" id="book-search" autocomplete="off" />
                 <!--table head-->
                 <thead id="book-thead">
                   <tr>
@@ -161,8 +161,8 @@
                     <h3 class="font-thin title">Add a Member</h3>
                   </div>
                 </div>
+                <!--name-->
                 <div class="row">
-                  <!--name-->
                   <div class="col-6">
                     <div class="form-section">
                       <label class="font-normal">Full Name:<span class="required">*</span>
@@ -287,9 +287,9 @@
     </div>
   </div>
   <!--JavaScript-->
+  <script src="bookings.js"></script>
   <script src="books.js"></script>
   <script src="members.js"></script>
-  <script src="util.js"></script>
-  <script src="bookings.js"></script>
+  <script src="util.js" defer></script>
 </body>
 </html>

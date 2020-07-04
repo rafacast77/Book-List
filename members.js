@@ -1,10 +1,7 @@
 /** @format */
-
 ////////////////////////////////////////////////////////////////////////////////
-// MEMBERS TAB
+// Member-tab UI element declaration, identification, initialization
 ////////////////////////////////////////////////////////////////////////////////
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Books-Tab UI element variable declaration, identification, initialization
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 const memberForm_EL = document.querySelector('#members-form'),
   memberName_EL = document.querySelector('#member-name'),
@@ -13,7 +10,7 @@ const memberForm_EL = document.querySelector('#members-form'),
   memberSearch_EL = document.querySelector('#member-search'),
   memberTbody_EL = document.querySelector('#members-tbody');
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Book-Tab Objects and Functions
+// Member-Tab Objects and Functions
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 class Member {
   constructor(id, name, phone, address) {
@@ -25,12 +22,13 @@ class Member {
   }
 }
 class UIMembers {
-  static addMember(member) {
-    const memberRow = document.createElement('tr');
+  static addMember(name, phone, address) {
+    // Creates new member UI-row and object
+    const memberRow = document.createElement('tr'),
+      member = new Member(create_UUID(), name, phone, address);
     memberRow.id = 'member-tr';
-    member.id = create_UUID();
     memberRow.innerHTML = `
-    <td><span class="far fa-copy hover-grow tooltip tooltip--bottom-right" data-tooltip="Copy ID"></span>${member.id.toUpperCase()}</td>
+    <td><span class="far fa-copy hover-grow tooltip tooltip--bottom-right" data-tooltip="Copy ID"></span>${member.id}</td>
     <td>${member.name}</td>
     <td>${member.phone}</td>
     <td class="member-address"><i
@@ -51,79 +49,93 @@ class UIMembers {
       </div>
     </td>
     `;
+    // Adds new member to UI-row
     memberTbody_EL.appendChild(memberRow);
-    members.push(member);
-    console.log(members);
-
+    // Adds new member to dataset
+    membersDataset.push(member);
     toastAlert('New member has been added', 'success');
   }
-  static editMember(member) {
-    // Iterates through all rows if isbn match it edits that row
+
+  static removeMember(memberIDToRemove, e) {
+    // Removes member's UI-row
+    e.target.parentElement.parentElement.parentElement.remove();
+    // Removes member from dataset
+    let member = returnObjWithId(memberIDToRemove, 'member');
+    membersDataset.splice(membersDataset.indexOf(member), 1);
+    toastAlert('Member has been removed', 'success');
+  }
+
+  static editMember(id, name, phone, address) {
+    // Edits member UI-row
     document.querySelectorAll('#member-tr').forEach(function (tr) {
       let targetID = tr.children[0].innerText;
-      if (member.id === targetID) {
-        tr.children[1].textContent = member.name;
-        tr.children[2].textContent = member.phone;
-        tr.children[3].firstChild.dataset.tooltip = member.address;
+      if (id === targetID) {
+        tr.children[1].textContent = name;
+        tr.children[2].textContent = phone;
+        tr.children[3].firstChild.dataset.tooltip = address;
         toastAlert('Member successfully edited', 'success');
       }
     });
-  }
-  static removeMember(memberIDToRemove) {
-    for (let member of members) {
-      if (member.id === memberIDToRemove) {
-        members.splice(members.indexOf(member));
-        toastAlert('Member has been removed', 'success');
-      }
-    }
+    // Edit member in dataset
+    let memberToEdit = returnObjWithId(id, 'member');
+    memberToEdit.name = name;
+    memberToEdit.phone = phone;
+    memberToEdit.address = address;
   }
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Book-Tab Event Listeners
+// Member-Tab Event Listeners
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Add Member
 memberForm_EL.addEventListener('submit', function (e) {
-  const name = memberName_EL.value,
+  let name = memberName_EL.value,
     phone = memberPhone_EL.value,
-    address = memberAddress_EL.value,
-    member = new Member(null, name, phone, address);
-  if (member.name === '' || member.phone === '' || member.address === '') {
-    toastAlert('All member fields must be completed', 'error');
-  } else {
-    UIMembers.addMember(member);
+    address = memberAddress_EL.value;
+
+  // User Input Validation
+  if (name !== '' || phone !== '' || address !== '') {
+    UIMembers.addMember(name, phone, address);
 
     memberName_EL.value = '';
     memberPhone_EL.value = '';
     memberAddress_EL.value = '';
+  } else {
+    toastAlert('All member fields must be completed', 'error');
   }
-
   e.preventDefault();
 });
-//
+
+// Listener for member table body
 memberTbody_EL.addEventListener('click', function (e) {
+  //Edit Member
   if (e.target.classList.contains('fa-edit')) {
+    // Triggers member edit modal
     editModal(e, 'member');
+    // Edit
+    modalEditFooter_EL.addEventListener('click', function edit(e2) {
+      if (e2.target.classList.contains('save')) {
+        const name = modalEditInput1_EL.value,
+          phone = modalEditInput2_EL.value,
+          id = modalEditInput3_EL.value,
+          modalEditInput4_EL = document.querySelector('#modal-edit-input4'),
+          address = modalEditInput4_EL.value;
+
+        UIMembers.editMember(id, name, phone, address);
+        modalEditFooter_EL.removeEventListener('click', edit);
+        modalEditInput4_EL.parentElement.remove();
+      }
+    });
   }
+  // Triggers member delete modal
   if (e.target.classList.contains('fa-trash')) {
     removeModal(e, 'member');
   }
+  // Copy member ID to clipboard
   if (e.target.classList.contains('fa-copy')) {
     copyToClipboard(e);
   }
 });
-// Edit Member
-modalEditFooter_EL.addEventListener('click', function (e) {
-  const modalEditInput4_EL = document.querySelector('#modal-edit-input4');
-  if (e.target.classList.contains('save')) {
-    const name = modalEditInput1_EL.value,
-      phone = modalEditInput2_EL.value,
-      id = modalEditInput3_EL.value,
-      address = modalEditInput4_EL.value,
-      member = new Member(id, name, phone, address);
-    UIMembers.editMember(member);
-  }
-  modalEditInput4_EL.parentElement.remove();
-});
+
 // Search Member
 memberSearch_EL.addEventListener('keyup', function (e) {
   search(e, '#member-tr');

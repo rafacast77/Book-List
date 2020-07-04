@@ -1,17 +1,15 @@
 /** @format */
 ////////////////////////////////////////////////////////////////////////////////
-// BOOKS TAB UI element variable declaration, identification, initialization
+// Book-Tab UI element declaration, identification, initialization
 ////////////////////////////////////////////////////////////////////////////////
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-const bookContainer_EL = document.querySelector('.tab-content'),
-  modalEditFooter_EL = document.querySelector('.modal-footer'),
-  form_EL = document.querySelector('#book-form'),
+const bookForm_EL = document.querySelector('#book-form'),
+  bookTitle_EL = document.querySelector('#book-title'),
+  bookAuthor_EL = document.querySelector('#book-author'),
+  bookISBN_EL = document.querySelector('#book-isbn'),
+  bookSearch_EL = document.querySelector('#book-search'),
   bookTableBody_EL = document.querySelector('#book-tbody'),
-  edit_body = document.querySelector('#edit-body'),
-  deleteWarning_EL = document.querySelector('#modal-warning'),
-  delItemName_EL = document.querySelector('#delete-message'),
-  search_EL = document.querySelector('#search');
-
+  modalEditFooter_EL = document.querySelector('.modal-footer');
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Book-Tab Objects and Functions
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -24,8 +22,10 @@ class Book {
   }
 }
 class UIBooks {
-  static addBook(book) {
-    const newBook_EL = document.createElement('tr');
+  static addBook(title, author, isbn) {
+    // Creates new UI Element and member object
+    const newBook_EL = document.createElement('tr'),
+      book = new Book(title, author, isbn);
     newBook_EL.id = 'book-tr';
     newBook_EL.innerHTML = `
     <td><span class="far fa-copy hover-grow tooltip tooltip--bottom-right" data-tooltip="Copy ISBN"></span>${book.isbn}</td>
@@ -44,77 +44,106 @@ class UIBooks {
       </div>
     </td>
     `;
-    library.push(book);
+    // Adds new book to dataset
+    bookDataset.push(book);
+    // Adds new book to UI-row
     bookTableBody_EL.appendChild(newBook_EL);
     toastAlert('A new Book has been added', 'success');
   }
-  static removeBook(bookIsbn) {
-    for (let book of library) {
-      if (book.isbn === bookIsbn) {
-        library.splice(library.indexOf(book));
-        toastAlert('Book has been removed', 'success');
-      }
-    }
+
+  static removeBook(bookIsbn, e) {
+    // Removes book's UI-row
+    e.target.parentElement.parentElement.parentElement.remove();
+    // Removes book from dataset
+    let book = returnObjWithId(bookIsbn, 'book');
+    bookDataset.splice(bookDataset.indexOf(book), 1);
+    toastAlert('Book has been removed', 'success');
   }
-  static editBook(book) {
-    // Iterates through all rows if isbn match it edits that row
+
+  static editBook(isbn, title, author) {
+    // Edits book UI-row
     document.querySelectorAll('#book-tr').forEach(function (tr) {
       let targetisbn = tr.children[0].innerText;
-      if (book.isbn === targetisbn) {
-        tr.children[1].textContent = book.title;
-        tr.children[2].textContent = book.author;
+      if (isbn === targetisbn) {
+        tr.children[1].textContent = title;
+        tr.children[2].textContent = author;
         toastAlert('Book has been successfully edited', 'success');
       }
     });
+    // Edit book in dataset
+    let bookToEdit = returnObjWithId(isbn, 'book');
+    bookToEdit = title;
+    bookToEdit = author;
   }
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Book-Tab Event Listeners
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 // Add Book
-form_EL.addEventListener('submit', function (e) {
-  const title = document.querySelector('#book-title').value,
-    author = document.querySelector('#book-author').value,
-    isbn = document.querySelector('#book-isbn').value,
-    book = new Book(title, author, isbn);
-  if (book.title === '' || book.isbn === '') {
-    toastAlert('Inputs with an asterisk must be filled', 'error');
-  } else if (book.isbn.length < 10 || book.isbn.length > 13) {
-    toastAlert('ISBN must be between 10 to 13 characters', 'error');
-  } else {
-    UIBooks.addBook(book);
+bookForm_EL.addEventListener('submit', function (e) {
+  let title = bookTitle_EL.value,
+    author = bookAuthor_EL.value,
+    isbn = bookISBN_EL.value;
 
-    document.querySelector('#book-title').value = '';
-    document.querySelector('#book-author').value = '';
-    document.querySelector('#book-isbn').value = '';
+  // User Input Validation
+  if (title !== '' || isbn !== '') {
+    // ISBN validation
+    if (
+      isbn.includes('-', 3) &&
+      isbn.includes('-', 6) &&
+      isbn.includes('-', 11)
+    ) {
+      if (isbn.length >= 12 && isbn.length <= 17) {
+        UIBooks.addBook(title, author, isbn);
+
+        bookTitle_EL.value = '';
+        bookAuthor_EL.value = '';
+        bookISBN_EL.value = '';
+      } else {
+        toastAlert(
+          'ISBN must be between 10 to 13 characters and contain all dashes',
+          'error'
+        );
+      }
+    } else {
+      toastAlert('ISBN format must include all hyphens', 'error');
+    }
+  } else {
+    toastAlert('Inputs with an asterisk must be filled', 'error');
   }
+
   e.preventDefault();
 });
-// Open Edit-Modal
+
+// Listener for book table body
 bookTableBody_EL.addEventListener('click', function (e) {
+  // Triggers book edit modal
   if (e.target.classList.contains('fa-edit')) {
     editModal(e, 'book');
+    // Edit Book
+    modalEditFooter_EL.addEventListener('click', function edit(e2) {
+      if (e2.target.classList.contains('save')) {
+        const title = modalEditInput1_EL.value,
+          author = modalEditInput2_EL.value,
+          isbn = modalEditInput3_EL.value;
+
+        UIBooks.editBook(isbn, title, author);
+
+        modalEditFooter_EL.removeEventListener('click', edit);
+      }
+    });
   }
+  // Triggers book delete modal
   if (e.target.classList.contains('fa-trash')) {
     removeModal(e, 'book');
   }
+  // Copy book ID to clipboard
   if (e.target.classList.contains('fa-copy')) {
     copyToClipboard(e);
   }
 });
-// Edit Book
-modalEditFooter_EL.addEventListener('click', function (e) {
-  if (e.target.classList.contains('save')) {
-    const title = modalEditInput1_EL.value,
-      author = modalEditInput2_EL.value,
-      isbn = modalEditInput3_EL.value,
-      book = new Book(title, author, isbn);
 
-    UIBooks.editBook(book);
-  }
-});
 // Search Book
-search_EL.addEventListener('keyup', function (e) {
+bookSearch_EL.addEventListener('keyup', function (e) {
   search(e, '#book-tr');
 });
