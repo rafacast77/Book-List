@@ -88,25 +88,30 @@ bookForm_EL.addEventListener('submit', function (e) {
   // User Input Validation
   if (title !== '' || isbn !== '') {
     // ISBN validation
-    if (
-      isbn.includes('-', 3) &&
-      isbn.includes('-', 6) &&
-      isbn.includes('-', 11)
-    ) {
-      if (isbn.length >= 12 && isbn.length <= 17) {
-        UIBooks.addBook(title, author, isbn);
+    console.log(isbn.slice(0, 3));
+    if (isbn.slice(0, 3) === '978') {
+      if (
+        isbn.includes('-', 3) &&
+        isbn.includes('-', 6) &&
+        isbn.includes('-', 11)
+      ) {
+        if (isbn.length >= 12 && isbn.length <= 17) {
+          UIBooks.addBook(title, author, isbn);
 
-        bookTitle_EL.value = '';
-        bookAuthor_EL.value = '';
-        bookISBN_EL.value = '';
+          bookTitle_EL.value = '';
+          bookAuthor_EL.value = '';
+          bookISBN_EL.value = '';
+        } else {
+          toastAlert(
+            'ISBN must be between 10 to 13 characters and contain all dashes',
+            'error'
+          );
+        }
       } else {
-        toastAlert(
-          'ISBN must be between 10 to 13 characters and contain all dashes',
-          'error'
-        );
+        toastAlert('ISBN format must include all hyphens', 'error');
       }
     } else {
-      toastAlert('ISBN format must include all hyphens', 'error');
+      toastAlert('ISBN must start with 978', 'error');
     }
   } else {
     toastAlert('Inputs with an asterisk must be filled', 'error');
