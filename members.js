@@ -59,7 +59,7 @@ class UIMembers {
   static removeMember(memberIDToRemove, e) {
     // Removes member's UI-row
     e.target.parentElement.parentElement.parentElement.remove();
-    // Removes member from dataset
+    // Removes member from datasets
     let member = returnObjWithId(memberIDToRemove, 'member');
     membersDataset.splice(membersDataset.indexOf(member), 1);
     toastAlert('Member has been removed', 'success');

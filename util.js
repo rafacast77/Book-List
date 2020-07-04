@@ -22,11 +22,15 @@ const card = document.querySelector('.card'),
 let bookDataset = [],
   membersDataset = [],
   bookingDataset = [];
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Loads the app with dummy examples from database
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 document.addEventListener('DOMContentLoaded', addDummyInfo());
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Other functions Multi-functions and reusable components
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Tab navigation
 tabs_ELs.forEach((tab) => {
   tab.addEventListener('click', function (e) {
@@ -351,7 +355,6 @@ function addDummyInfo() {
 
   bookingDataset = [booking1, booking2, booking3];
   function loadingBookingsFromDB(booking) {
-
     // Checks if booking is late
     let returnTagColor = 'tag--success',
       returnLabel = 'On Time';
