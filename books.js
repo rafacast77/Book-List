@@ -88,7 +88,6 @@ bookForm_EL.addEventListener('submit', function (e) {
   // User Input Validation
   if (title !== '' || isbn !== '') {
     // ISBN validation
-    console.log(isbn.slice(0, 3));
     if (isbn.slice(0, 3) === '978') {
       if (
         isbn.includes('-', 3) &&

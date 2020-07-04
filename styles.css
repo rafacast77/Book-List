@@ -2,6 +2,7 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // GENERAL CONTENT
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+/*Loading screen*/
 /* Tab Navigation*/
 [data-tab-content] {
   display: none;
@@ -28,6 +29,7 @@ body {
   background-image: url('library.jpg');
   background-size: cover;
   background-attachment: fixed;
+  animation-duration: 1s; /* don't forget to set a duration! */
 }
 .card {
   padding: 1rem;

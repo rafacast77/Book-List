@@ -394,4 +394,6 @@ function addDummyInfo() {
   bookingDataset.forEach((booking) => {
     loadingBookingsFromDB(booking);
   });
+
+ 
 }
