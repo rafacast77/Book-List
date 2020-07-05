@@ -18,7 +18,6 @@ This is a desktop application for a library system. The app allows to manage boo
   * Members must be added to the UI and dataset
   * Members can be edited and removed from dataset and UI
   * Search bar to search by member's ID, name, phone#.
-=======
   * Search bar to search by member's ID, name, phone#.
   * Member ID can be easily copied to clipboard.
 * **Booking**
