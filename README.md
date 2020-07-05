@@ -1,5 +1,5 @@
 # Librarian   :books:   
-This is a desktop application for a library system. The app allows to manage books, members and bookings. The application takes an object oriented approach using JS ES6 classes, and static methods.
+This is a desktop application for a library system. The app allows to manage books, members and bookings. My solution takes an object oriented approach using JS ES6 classes, and static methods.
 
 ### This are the requierements fulfilled by the app
 * **Books**
