@@ -53,4 +53,4 @@ This is a desktop application for a library system. The app allows to manage boo
    * DOM Styles, Events, Element, Document, Window.
    * Manipulation of Array, string, date object, class object, static methods
 * **Color pallette :** :art: 
-![Colors](angular-src/src/app/images/NutriApp_color_palette.jpg?raw=true "Color Palette")
+![Colors](Librarian/blob/master/img/Librarian_color_palette.jpg?raw=true "Color Palette")
