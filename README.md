@@ -41,9 +41,10 @@ This is a desktop application for a library system. The app allows to manage boo
 * **CSS**
    * **Cirrus** A fully responsive CSS framework with beautiful controls and simplistic structure. The framework is well documented and intuitive to use.
 
-* **DOM manipulation with vanilla JavaScript :** I have used Vanilla JavaScript for DOM manipulation.
+* **DOM manipulation with vanilla JavaScript :**
    * Event delegation
    * DOM Styles, Events, Element, Document, Window.
+   * Manipulation of Array, string, date object, class object, static methods
 * **Color pallette :** :art: 
 
 ![Colors](angular-src/src/app/images/NutriApp_color_palette.jpg?raw=true "Color Palette")
