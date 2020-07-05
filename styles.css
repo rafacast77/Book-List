@@ -24,13 +24,14 @@
     font-size: 14px !important;
   }
 }
-
-body {
-  background-image: url('library.jpg');
+html { 
+  background: url('library.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
-  background-attachment: fixed;
-  animation-duration: 1s; /* don't forget to set a duration! */
 }
+
 .card {
   padding: 1rem;
 }

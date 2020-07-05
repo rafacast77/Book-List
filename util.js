@@ -26,7 +26,10 @@ let bookDataset = [],
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Loads the app with dummy examples from database
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-document.addEventListener('DOMContentLoaded', addDummyInfo());
+setTimeout(function(){
+  document.addEventListener('DOMContentLoaded', addDummyInfo());
+}, 1500);
+
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Other functions Multi-functions and reusable components
@@ -399,6 +402,6 @@ function addDummyInfo() {
   bookingDataset.forEach((booking) => {
     loadingBookingsFromDB(booking);
   });
-
- 
+    card.className = 'card animate__animated animate__zoomIn';
 }
+  
