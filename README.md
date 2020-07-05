@@ -1,7 +1,7 @@
 # Librarian   :books:   
 This is a desktop application for a library system. The app allows to manage books, members and bookings. My solution takes an object oriented approach using JS ES6 classes, and static methods.
 
-### This are the requierements fulfilled by the app
+## This are the requierements fulfilled by the app
 * **Books**
   * Book fields with * must be filled.
   * ISBN must be of the correct format.
@@ -27,11 +27,16 @@ This is a desktop application for a library system. The app allows to manage boo
   * Must check if book is available.
   * Added bookings must be added to UI and dataset.
   * Bookings must be returned after 7 days of booking, booking must include a date object with a return section informing when the book must be returned and weather is delayed or on time.
-  * A return button which removes the booking from UI and dataset.
+  * A return button which removes the booking from UI and dataset. Returns the book to library. Member booking limit is set appropriately.
+ * **General**
+  * Application is when changing windows size on desktop pc
+  * Must rehuse HTML components
+  * Must use alerts to inform the user of error or success
+  * Must Load dummy examples on DOM load.
+  * Must be well documented (No exesive documentation)
   
 ## Technologies and techniques used for this project
 * **HTML 5**
-
 
 * **CSS**
    * **Cirrus** A fully responsive CSS framework with beautiful controls and simplistic structure. The framework is well documented and intuitive to use.
